@@ -1,0 +1,18 @@
+/* MAIN */
+  Develop: Danielle Bastien
+  Site: https://daniellemlbastien.com
+
+/* SITE */
+  Last update: 06/01/2025
+  Doctype: HTML5
+  IDE: VS Code
+
+
+/* CREDITS */
+
+Framework: https://nextjs.org/
+CMS: https://www.sanity.io
+Brand Icons: https://github.com/danleech/simple-icons
+Accessibility Icons: https://www.svgrepo.com/
+Favicons: http://realfavicongenerator.net/
+Open Dyslexic Font: https://opendyslexic.org/

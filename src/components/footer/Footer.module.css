@@ -1,0 +1,4 @@
+.footer {
+    border-top: 2px solid var(--clr-secondary);
+    max-width: clamp(var(--container-s), 100vw, var(--container-l));
+}
