@@ -329,9 +329,9 @@ export type AUTHOR_QUERYResult = {
   codepen: string | null;
   github: string | null;
 } | null;
-// Variable: AUTHOR_PAGE_QUERY
+// Variable: AUTHOR_CARD_QUERY
 // Query: *[_type == "author" && slug.current == $slug && !(_id in path('drafts.**'))][0]{  name,   pronouns,   location,   bio,   image,  title,   slug,   linkedin,   codepen,   github}
-export type AUTHOR_PAGE_QUERYResult = {
+export type AUTHOR_CARD_QUERYResult = {
   name: string;
   pronouns: string;
   location: string;
@@ -371,11 +371,11 @@ export type AUTHOR_PAGE_QUERYResult = {
   github: string | null;
 } | null;
 // Variable: CATEGORIES_QUERY
-// Query: *[_type == "category" && defined(slug.current)]{  _id, title, slug}
+// Query: *[_type == "category" && defined(slug.current)]{  _id, title, 'slug': slug.current}
 export type CATEGORIES_QUERYResult = Array<{
   _id: string;
   title: string;
-  slug: Slug;
+  slug: string;
 }>;
 // Variable: CATEGORIES_SLUG_QUERY
 // Query: *[_type == "category" && slug.current == $slug][0]{  _id, title}
@@ -404,7 +404,7 @@ export type POSTS_QUERYResult = Array<{
   slug: Slug;
 }>;
 // Variable: POST_SLUG_QUERY
-// Query: *[_type == "post" && slug.current == $slug && !(_id in path('drafts.**'))][0]{    title,    mainImage,    _createdAt,    _updatedAt,    body,    "categories": categories[]->{title, "slug": slug.current },    "techStack": techStack[]->{title, "slug": slug.current },    "author": {        "name": author->name,        "image": author->image,        "bio": author->bio    }  }
+// Query: *[_type == "post" && slug.current == $slug && !(_id in path('drafts.**'))][0]{    title,    mainImage,    _createdAt,    _updatedAt,    body,    "categories": categories[]->{title, "slug": slug.current },    "techStack": techStack[]->{title, "slug": slug.current }  }
 export type POST_SLUG_QUERYResult = {
   title: string;
   mainImage: {
@@ -426,38 +426,6 @@ export type POST_SLUG_QUERYResult = {
     slug: string;
   }> | null;
   techStack: null;
-  author: {
-    name: string | null;
-    image: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | null;
-    bio: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal";
-      listItem?: never;
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }> | null;
-  };
 } | null;
 // Variable: POST_CATEGORY_QUERY
 // Query: *[_type == "post" && $slug in categories[]->slug.current && !(_id in path('drafts.**'))]{  _id,  title,  slug,  "categories": categories[]->{title, "slug": slug.current },  "techStack": techStack[]->{title, "slug": slug.current },  "author": {      "name": author->name,  }}
@@ -495,13 +463,13 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"author\"][0]{\n    name, \n    pronouns, \n    location, \n    title, \n    slug, \n    linkedin, \n    codepen, \n    github\n  }": AUTHOR_QUERYResult;
-    "*[_type == \"author\" && slug.current == $slug && !(_id in path('drafts.**'))][0]{\n  name, \n  pronouns, \n  location, \n  bio, \n  image,\n  title, \n  slug, \n  linkedin, \n  codepen, \n  github\n}": AUTHOR_PAGE_QUERYResult;
-    "*[_type == \"category\" && defined(slug.current)]{\n  _id, title, slug\n}": CATEGORIES_QUERYResult;
+    "*[_type == \"author\" && slug.current == $slug && !(_id in path('drafts.**'))][0]{\n  name, \n  pronouns, \n  location, \n  bio, \n  image,\n  title, \n  slug, \n  linkedin, \n  codepen, \n  github\n}": AUTHOR_CARD_QUERYResult;
+    "*[_type == \"category\" && defined(slug.current)]{\n  _id, title, 'slug': slug.current\n}": CATEGORIES_QUERYResult;
     "*[_type == \"category\" && slug.current == $slug][0]{\n  _id, title\n}": CATEGORIES_SLUG_QUERYResult;
     "*[_type == \"techStack\" && defined(slug.current)]{\n  _id, title, slug\n}": TAGS_QUERYResult;
     "*[_type == \"techStack\" && slug.current == $slug][0]{\n  _id, title\n}": TAGS_SLUG_QUERYResult;
     "*[_type == \"post\" && defined(slug.current)]{\n    _id, title, slug\n  }": POSTS_QUERYResult;
-    "*[_type == \"post\" && slug.current == $slug && !(_id in path('drafts.**'))][0]{\n    title,\n    mainImage,\n    _createdAt,\n    _updatedAt,\n    body,\n    \"categories\": categories[]->{title, \"slug\": slug.current },\n    \"techStack\": techStack[]->{title, \"slug\": slug.current },\n    \"author\": {\n        \"name\": author->name,\n        \"image\": author->image,\n        \"bio\": author->bio\n    }\n  }": POST_SLUG_QUERYResult;
+    "*[_type == \"post\" && slug.current == $slug && !(_id in path('drafts.**'))][0]{\n    title,\n    mainImage,\n    _createdAt,\n    _updatedAt,\n    body,\n    \"categories\": categories[]->{title, \"slug\": slug.current },\n    \"techStack\": techStack[]->{title, \"slug\": slug.current }\n  }": POST_SLUG_QUERYResult;
     "*[_type == \"post\" && $slug in categories[]->slug.current && !(_id in path('drafts.**'))]{\n  _id,\n  title,\n  slug,\n  \"categories\": categories[]->{title, \"slug\": slug.current },\n  \"techStack\": techStack[]->{title, \"slug\": slug.current },\n  \"author\": {\n      \"name\": author->name,\n  }\n}": POST_CATEGORY_QUERYResult;
     "*[_type == \"post\" && $slug in techStack[]->slug.current && !(_id in path('drafts.**'))]{\n  _id,\n  title,\n  slug,\n  \"categories\": categories[]->{title, \"slug\": slug.current },\n  \"techStack\": techStack[]->{title, \"slug\": slug.current },\n  \"author\": {\n      \"name\": author->name\n  }\n}": POST_TAG_QUERYResult;
   }

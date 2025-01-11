@@ -305,6 +305,20 @@ p:not(:first-of-type) {
 	margin-block: var(--pblock-space, var(--spacer-m));
 }
 
+.portable-text-elements {
+	& h2 {
+		font-size: var(--size-h2);
+		font-weight: var(--weight-bold);
+		margin-block: var(--pblock-space, var(--spacer-m));
+	}
+
+	& h3 {
+		font-size: var(--size-h3);
+		font-weight: var(--weight-bold);
+		margin-block: var(--pblock-space, var(--spacer-m));
+	}
+}
+
 /* user reading width for site settings */
 main {
 	margin-inline: auto;
