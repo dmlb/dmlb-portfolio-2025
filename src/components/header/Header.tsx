@@ -8,17 +8,8 @@ import Link from 'next/link';
 
 import styles from './Header.module.css';
 
-const MAIN_NAV: { name: string, path: string}[] = [
-    { name: 'Home', path: '/' },
-    // { name: 'About', path: '/about' },
-    // { name: 'CV', path: '/cv' },
-    // { name: 'Projects', path: '/projects' },
-    // { name: 'Endorsements', path: '/endorsements' },
-    { name: 'Posts', path: '/posts' },
-];
 
-
-export default function Header({author}: {author:Partial<AUTHOR_QUERYResult>}) {
+export default function Header({author, navigation }: {author:Partial<AUTHOR_QUERYResult>, navigation: {name: string, path: string}[]}) {
     const pathname = usePathname()
 
     return (<header className={styles.header} data-testid="global-header">
@@ -39,7 +30,7 @@ export default function Header({author}: {author:Partial<AUTHOR_QUERYResult>}) {
 
 
 	<nav className={styles.nav} aria-label="main site">
-        {MAIN_NAV.map(({name, path}) => {
+        {navigation.map(({name, path}) => {
             let active: 'page' | boolean = pathname === path ? 'page' : false;
             return <Link key={path} aria-current={active} href={path}>{name}</Link>
         })}

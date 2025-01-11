@@ -7,6 +7,7 @@ import "./globals.css";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import { AUTHOR_QUERYResult } from "@/types/sanity";
+import { MAIN_NAV } from "@/constants/navigation";
 
 
 // Font files can be colocated inside of `pages`
@@ -36,7 +37,7 @@ export default async function RootLayout({
       >
         <div id="top_site">
         <a className="skip-to-content-link" href="#main"> Skip to content </a>
-          <Header author={author} />
+          <Header navigation={MAIN_NAV} author={author} />
           <main id="main">
             {children}
           </main>

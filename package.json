@@ -11,7 +11,8 @@
     "play:test": "npx playwright test",
     "play:codegen": "npx playwright codegen",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test-storybook": "test-storybook"
   },
   "dependencies": {
     "@portabletext/react": "^3.2.0",
@@ -27,6 +28,8 @@
     "@playwright/test": "^1.49.1",
     "@sanity/client": "^6.24.1",
     "@sanity/image-url": "^1.1.0",
+    "@storybook/addon-a11y": "^8.4.7",
+    "@storybook/addon-actions": "^8.4.7",
     "@storybook/addon-essentials": "^8.4.7",
     "@storybook/addon-interactions": "^8.4.7",
     "@storybook/addon-onboarding": "^8.4.7",
