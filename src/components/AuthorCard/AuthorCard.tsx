@@ -16,15 +16,18 @@ export default async function AuthorCard() {
     }
 
     return (
-        <div className="flex gap-8 items-center mb-8 mt-8">
+        <div>
             {author.image && <SanityImage width={100} height={100} src={author.image} alt={author.name} />}
-
-            <div className="author-card-info flex flex-col gap-4">
-                <h2 className="text-xl font-bold"><Link href="/about">{author.name} ({author.pronouns})</Link></h2>
-                <div className="text-base">
-                {author?.bio && <PortableText
-                    value={author?.bio} />}
-                </div>
+            <div>
+                <h2>
+                    <Link href="/about">{author.name} ({author.pronouns})</Link>
+                </h2>
+                {author?.bio && (
+                    <div>
+                        <PortableText
+                            value={author?.bio} />
+                    </div>
+                )}
             </div>
         </div>
     )

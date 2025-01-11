@@ -1,4 +1,30 @@
 .footer {
+    margin: var(--spacer-l) auto var(--spacer);
+    padding: var(--spacer) var(--spacer-m) var(--spacer-l);
     border-top: 2px solid var(--clr-secondary);
     max-width: clamp(var(--container-s), 100vw, var(--container-l));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--spacer-m);
+}
+
+.a11yWebringClub {
+    & h2 {
+        font-size: var(--size-h5);
+        margin: var(--spacer-s) 0;
+    }
+
+    & p {
+        margin: var(--spacer-s) 0;
+    }
+}
+
+.a11yWebringList {
+    padding: unset;
+    margin: unset;
+    list-style: none;
+    display: flex;
+    gap: var(--spacer-s);
 }

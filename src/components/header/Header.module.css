@@ -25,9 +25,31 @@
     transition: transform 200ms linear;
 }
 
+.socials {
+    flex: 0 0 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.name {
+    font-size: var(--size-h1);
+    margin: unset;
+
+    & span {
+        display: block;
+        font-weight: var(--weight-normal);
+        margin: var(--spacer) 0;
+        font-size: var(--size-h6);
+        color: var(--clr-secondary);
+    }
+}
+
 .nav {
     max-width: clamp(var(--container-s), 100vw, var(--container));
     margin-inline: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
     gap: var(--spacer-m) var(--spacer-l);
 
     & a {
@@ -52,6 +74,6 @@
     }
 }
 
-:global([data-mode="light"]) .headline picture {
+:global([data-mode="light"]) .headline img {
     filter: sepia(1) brightness(50%) contrast(200%);	
 }

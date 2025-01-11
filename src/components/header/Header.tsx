@@ -28,17 +28,17 @@ export default function Header({author}: {author:Partial<AUTHOR_QUERYResult>}) {
             alt="curly braces inside a lens"
             height={75}
             width={75} />
-		<h1 className="text-2xl font-bold m-0">
+		<h1 className={styles.name}>
 			{author?.name}
-			<span className='block text-sm font-normal txt-clr-secondary'>{author?.title}</span>
+			<span>{author?.title}</span>
 		</h1>
 	</div>
-	<div className="flex justify-center basis-full">
+	<div className={styles.socials}>
 		// todo dev links
 	</div>
 
 
-	<nav className={`${styles.nav} flex flex-wrap justify-evenly`} aria-label="main site">
+	<nav className={styles.nav} aria-label="main site">
         {MAIN_NAV.map(({name, path}) => {
             let active: 'page' | boolean = pathname === path ? 'page' : false;
             return <Link key={path} aria-current={active} href={path}>{name}</Link>

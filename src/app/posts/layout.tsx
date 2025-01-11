@@ -11,12 +11,12 @@ export default async function PostLayout({
     const categories: CATEGORIES_QUERYResult = await sanityClient.fetch(CATEGORIES_QUERY);
 
     return (<>
-        <div className="my-8 max-w-3xl mx-auto">
+        <div>
         {children}
         </div>
-        <nav className="mt-16 flex flex-col items-center gap-4" aria-labelledby="allPostCatNavHeader">
-            <h2 id="allPostCatNavHeader" className="text-xl font-bold">All Post Categories</h2>
-            <PostCategoryList classNames="flex gap-4 mb-8" categories={categories} />
+        <nav aria-labelledby="allPostCatNavHeader">
+            <h2 id="allPostCatNavHeader">All Post Categories</h2>
+            <PostCategoryList categories={categories} />
         </nav>
         </>
     )

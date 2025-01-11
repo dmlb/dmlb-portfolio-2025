@@ -31,11 +31,11 @@ export default async function PostPage({
   return (
     <article>
       <header>
-        <h1 className="text-5xl font-bold mb-4">{post.title}</h1>
-        <p className="mb-0">
+        <h1>{post.title}</h1>
+        <p>
           <strong>Created</strong> <Date dateString={post._createdAt} />  • <strong>Updated</strong> <Date dateString={post._updatedAt} />
         </p>
-        <div className="flex gap-4 mb-8">
+        <div>
           <strong>Categorized under</strong>
           <PostCategoryList categories={post.categories}></PostCategoryList>
         </div>
@@ -44,13 +44,12 @@ export default async function PostPage({
         {post.mainImage && <SanityImage width={600} height={400} src={post.mainImage} alt={post.title} />}
       </header>
 
-      <div className="portable-text-elements flex flex-col">
+      <div>
         {post.body && <PortableText
           value={post.body} />}
-
       </div> 
 
-      <footer className="my-8 max-w-2xl mx-auto">
+      <footer>
         <AuthorCard />
       </footer>
     </article>

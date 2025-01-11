@@ -11,7 +11,7 @@ type Props = Omit<ImageProps, "src"> & {
 export default function SanityImage({ src, alt, ...props }: Props) {
   return (
     <Image
-      className="rounded-lg"
+      className="sanity-image"
       src={sanityImageUrl(src).url()}
       alt={alt}
       loader={({ width, quality = 100 }) =>
