@@ -24,7 +24,7 @@ export default defineType({
             validation: (rule) => rule.min(4).max(4),
         }),
         defineField({
-            name: 'teckStack',
+            name: 'techStack',
             title: 'Tech Stack',
             type: 'array',
             of: [{ type: 'reference', to: { type: 'techStack' } }],

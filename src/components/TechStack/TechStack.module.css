@@ -1,0 +1,6 @@
+.techStackList {
+    margin: var(--spacer) 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacer);
+}

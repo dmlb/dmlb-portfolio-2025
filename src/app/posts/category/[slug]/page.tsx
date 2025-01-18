@@ -1,7 +1,7 @@
+import PostCard from "@/components/Cards/PostCard/PostCard";
 import sanityClient from "@/lib/sanity-utils/sanityClient";
 import { CATEGORIES_SLUG_QUERY, POST_CATEGORY_QUERY } from "@/lib/sanity-utils/sanityQueries";
 import { POST_CATEGORY_QUERYResult, Slug } from "@/types/sanity";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
@@ -27,15 +27,13 @@ export default async function CategoryPostsPage({
 
     return (
         <>
-            <h1 className="font-bold text-4xl mb-8">{category.title} Posts</h1>
+            <h1>{category.title} Posts</h1>
             {posts.length === 0 && <p>No posts yet for this category</p>}
-            <ul>
+            <ul className="list-unstyled">
               {posts.map((post) => (
-                <li key={post._id}>
-                  <Link href={`/posts/${post.slug.current}`}>
-                    {post.title}
-                  </Link>
-                </li>
+                    <li key={post._id}>
+                      <PostCard post={post} />
+                    </li>
               ))}
             </ul>
         </>

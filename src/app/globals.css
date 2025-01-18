@@ -275,8 +275,10 @@ legend {
 	transform: translateY(0%);
 }
 
-.txt-clr-secondary {
-	color: var(--clr-secondary);
+.list-unstyled {
+	margin: unset;
+	padding: unset;
+	list-style: none;
 }
 
 /* global styles */
@@ -316,8 +318,7 @@ p:not(:first-of-type) {
 main {
 	margin-inline: auto;
 	max-width: clamp(var(--container-s), var(--user-reading-w, 100vw), var(--container-l));
-	padding-left: var(--spacer-m);
-	padding-right: var(--spacer-m);
+	padding: var(--spacer-l) var(--spacer-m);
 	container-type: inline-size;
 	container-name: main;
 }
@@ -562,6 +563,24 @@ a:not(.button, .card__link, .skip-to-content-link) {
 
 .card__actions+.card__actions {
 	margin-top: var(--spacer);
+}
+
+.card__category {
+	position: relative;
+	display: inline-flex;
+	top: calc(var(--spacer-s) * -1);
+	padding: var(--spacer-s) 0;
+	color: var(--clr-accent);
+	font-size: var(--size-h4);
+	font-weight: var(--weight-light);
+	letter-spacing: var(--letter-space-m);
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+	text-transform: uppercase;
+}
+
+[data-mode="light"] .card__category {
+	background-color: var(--canvas-bg);
+	padding: var(--spacer-s);
 }
 
 /* dialogs */

@@ -1,12 +1,13 @@
+import { PortableText } from "@portabletext/react";
+import { notFound } from "next/navigation";
+
 import sanityClient from "@/lib/sanity-utils/sanityClient";
 import { POST_SLUG_QUERY } from "@/lib/sanity-utils/sanityQueries";
 import { POST_SLUG_QUERYResult, Slug } from "@/types/sanity";
 import SanityImage from '@/components/SanityImage/SanityImage';
-import { PortableText } from "@portabletext/react";
-import { notFound } from "next/navigation";
 import Date from "@/components/Date/Date";
 import PostCategoryList from "@/components/PostCategoryList/PostCategoryList";
-import AuthorCard from "@/components/AuthorCard/AuthorCard";
+import AuthorCard from "@/components/Cards/AuthorCard/AuthorCard";
 
 export async function generateStaticParams() {
   const pages = await sanityClient.fetch(`*[_type == "posts"]{slug}`)
@@ -41,7 +42,7 @@ export default async function PostPage({
         </div>
         
 
-        {post.mainImage && <SanityImage width={600} height={400} src={post.mainImage} alt={post.title} />}
+        {post.mainImage && <SanityImage width={600} height={400} src={post.mainImage} alt={post.mainImage?.alt ?? post.title} />}
       </header>
 
       <div>

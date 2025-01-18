@@ -4,10 +4,9 @@ import { AUTHOR_QUERY } from "@/lib/sanity-utils/sanityQueries";
 import type { Metadata } from "next";
 import localFont from 'next/font/local'
 import "./globals.css";
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
+import Footer from "@/components/Globals/Footer/Footer";
+import Header from "@/components/Globals/Header/Header";
 import { AUTHOR_QUERYResult } from "@/types/sanity";
-import { MAIN_NAV } from "@/constants/navigation";
 
 
 // Font files can be colocated inside of `pages`
@@ -29,19 +28,19 @@ export default async function RootLayout({
 }>) {
 
   let settings;
-  const fontClass = settings ? openDyslexicFont.className: '';
+  const fontClass = settings ? openDyslexicFont.className : '';
 
   return (
     <html lang="en">
       <body itemScope itemType="http://schema.org/Person" className={`${fontClass} antialiased`}
       >
         <div id="top_site">
-        <a className="skip-to-content-link" href="#main"> Skip to content </a>
-          <Header navigation={MAIN_NAV} author={author} />
-          <main id="main">
-            {children}
-          </main>
+          <a className="skip-to-content-link" href="#main"> Skip to content </a>
         </div>
+        <Header author={author} />
+        <main id="main">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

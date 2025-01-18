@@ -48,6 +48,33 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'shortBio',
+      title: 'Bio One-liner',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'currently',
+      title: 'Currently',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'hideResume',
+      title: 'Hide Resume Link',
+      type: 'boolean',
+      initialValue: true,
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'resumePdfUrl',
+      title: 'Resume PDF URL',
+      type: 'url',
+      validation: rule => rule.uri({
+        scheme: ['https']
+      })
+    }),
+    defineField({
       name: 'bio',
       title: 'Bio',
       type: 'array',
@@ -59,6 +86,14 @@ export default defineType({
           lists: [],
         },
       ],
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'coreValues',
+      title: 'Core Values',
+      type: 'array',
+      of: [{type: 'string'}],
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'linkedin',

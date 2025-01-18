@@ -1,0 +1,5 @@
+.cardFloatImg {
+    float: left;
+    border-radius: var(--radi);
+    margin-inline-end: var(--spacer-m);
+}

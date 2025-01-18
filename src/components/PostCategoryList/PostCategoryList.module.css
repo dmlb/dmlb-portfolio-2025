@@ -1,0 +1,5 @@
+.postCategoryList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacer-m);
+}

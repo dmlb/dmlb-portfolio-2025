@@ -1,0 +1,12 @@
+.devLinks {
+    display: flex;
+    gap: var(--spacer);
+    align-items: center;
+}
+
+@container (max-width: 640px) {
+    .devLinks {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}

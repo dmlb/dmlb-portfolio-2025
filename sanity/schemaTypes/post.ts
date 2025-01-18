@@ -41,9 +41,10 @@ export default defineType({
       title: 'Categories',
       type: 'array',
       of: [{type: 'reference', to: {type: 'category'}}],
+      validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'teckStack',
+      name: 'techStack',
       title: 'Tech Stack',
       type: 'array',
       of: [{ type: 'reference', to: { type: 'techStack' } }],

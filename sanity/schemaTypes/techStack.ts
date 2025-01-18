@@ -27,7 +27,9 @@ export default defineType({
             name: "icon",
             type: "iconPicker",
             options: {
-                providers: ["si"]
+                providers: ["si"],
+                storeSvg: true,
+                outputFormat: 'react',
             }
         }),
     ],

@@ -1,22 +1,34 @@
+import { notFound } from "next/navigation";
+
 import sanityClient from "@/lib/sanity-utils/sanityClient";
 import { POSTS_QUERY } from "@/lib/sanity-utils/sanityQueries";
-import Link from "next/link";
+import PostCard from "@/components/Cards/PostCard/PostCard";
+import { Slug } from "@/types/sanity";
 
-export default async function Home() {
+export async function generateStaticParams() {
+  const pages = await sanityClient.fetch(`*[_type == "post"]{slug}`)
+ 
+  return pages.map((page: {slug: Slug}) => ({
+    slug: page.slug.current,
+  }))
+}
+
+export default async function PostsHome() {
   const posts = await sanityClient.fetch(POSTS_QUERY);
+    if (!posts) {
+      notFound()
+    }
 
   return (
-    <div>
+    <>
       <h1>Posts</h1>
-      <ul>
+      <ul className="list-unstyled">
         {posts.map((post) => (
           <li key={post._id}>
-            <Link href={`/posts/${post.slug.current}`}>
-              {post.title}
-            </Link>
+            <PostCard post={post} />
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 }

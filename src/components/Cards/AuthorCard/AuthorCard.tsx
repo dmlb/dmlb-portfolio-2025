@@ -9,23 +9,23 @@ import { PortableText } from "@portabletext/react";
 
 
 export default async function AuthorCard() {
-    const author: AUTHOR_CARD_QUERYResult = await sanityClient.fetch(AUTHOR_CARD_QUERY, { slug: 'danielle-bastien' });
+    const author: AUTHOR_CARD_QUERYResult = await sanityClient.fetch(AUTHOR_CARD_QUERY);
 
     if (!author) {
         return null;
     }
 
     return (
-        <div>
-            {author.image && <SanityImage width={100} height={100} src={author.image} alt={author.name} />}
+        <div data-testid="ncmp-author-card">
+            {author.image && <SanityImage width={100} height={100} src={author.image} alt={author.image?.alt ?? author.name} />}
             <div>
                 <h2>
                     <Link href="/about">{author.name} ({author.pronouns})</Link>
                 </h2>
-                {author?.bio && (
+                {author.shortBio && (
                     <div>
                         <PortableText
-                            value={author?.bio} />
+                            value={author.shortBio} />
                     </div>
                 )}
             </div>

@@ -1,0 +1,70 @@
+.projectsForm {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacer-m);
+    margin-bottom: var(--spacer-l);
+
+    & details {
+        width: 100%;
+    }
+}
+
+.formReset {
+    background-color: var(--btn-bg, transparent);
+    border: 2px solid var(--clr-accent);
+    color: var(--btn-clr, var(--canvas-txt));
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.2rem;
+    width: 2.2rem;
+    font-size: var(--btn-text-size, var(--size-h6));
+    border-radius: var(--radi-s);
+    transition: all 300ms ease-in-out;
+
+    &:hover,
+    &:focus-visible {
+        transform: scale(1.05);
+        --btn-clr: var(--canvas-bg);
+        --btn-bg: hsl(var(--clr-accent-hue),
+            calc(var(--clr-accent-saturation) + 30%),
+            var(--clr-accent-lightness));
+    }
+}
+
+.formRadioGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacer);
+    margin-block: var(--spacer);
+
+    --icon-stroke: var(--clr-accent);
+    --icon-fill: var(--clr-accent);
+}
+
+.projectsCardList {
+    padding: 0 var(--spacer-l);
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(var(--project-columns, 1), 1fr);
+    gap: var(--spacer-l);
+
+    --card-width: 100%;
+
+    & .card {
+        height: 100%;
+    }
+}
+
+@container main (min-width: 640px) {
+    .projectsCardList {
+        --project-columns: 2;
+    }
+}
+
+@container main (min-width: 960px) {
+    .projectsCardList {
+        --project-columns: 3;
+    }
+}

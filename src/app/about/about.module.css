@@ -1,0 +1,54 @@
+.wrapper,
+.sidebar {
+    max-width: 100%;
+}
+
+.bio {
+    --pline-height: 1.75;
+    --pblock-space: 3rem;
+}
+
+.sidebarInner {
+    padding: var(--spacer-m);
+    container-type: inline-size;
+    container-name: sidebar;
+}
+
+.quickList {
+    font-size: var(--size-body);
+
+    & dt {
+        display: block;
+        font-weight: var(--weight-medium);
+        letter-spacing: var(--letter-space-m);
+        margin-bottom: var(--spacer-s);
+    }
+
+    & dd {
+        line-height: 1.5;
+        margin: 0 0 var(--spacer-m) 0;
+    }
+}
+
+.skillList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacer-m);
+}
+
+@container main (min-width: 960px) {
+    .wrapper {
+        display: grid;
+        grid-template-columns: 1fr 360px;
+        grid-template-areas: 'info sidebar';
+        gap: 4rem;
+    }
+
+    .sidebar {
+        grid-area: sidebar;
+    }
+
+    .aboutContent {
+        grid-area: info;
+    }
+}

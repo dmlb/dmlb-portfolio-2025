@@ -22,9 +22,6 @@
 }
 
 .a11yWebringList {
-    padding: unset;
-    margin: unset;
-    list-style: none;
     display: flex;
     gap: var(--spacer-s);
 }

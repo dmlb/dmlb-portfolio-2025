@@ -1,0 +1,21 @@
+.details {
+    border: 1px solid var(--clr-primary);
+    padding: var(--spacer);
+    border-radius: var(--radi);
+    margin-bottom: var(--spacer);
+}
+
+.details[open] .summary {
+    border-color: var(--clr-secondary);
+}
+
+.summary {
+    font-size: var(--size-h3);
+    padding: var(--spacer-s);
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+}
+
+.detailsContent {
+    padding: var(--spacer-l) var(--spacer-m) var(--spacer);
+}
