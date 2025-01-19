@@ -3,13 +3,14 @@ import Link from 'next/link';
 
 type Props = {
     post: POSTS_QUERYResult[0];
+    cardVariantClasses?: string;
 }
 
-export default function PostCard({ post }: Props) {
+export default function PostCard({ post, cardVariantClasses }: Props) {
     const {title, slug, categories} = post;
     const [mainCategory] = categories;
     return (
-        <article aria-label={title} data-testid="ncmp-post-card" className="card card--translucent card--bordered">
+        <article aria-label={title} data-testid="ncmp-post-card" className={`card ${cardVariantClasses}`}>
             <Link className="card__link" href={`/posts/${slug}`}>            
             <div className={`card__category ${mainCategory?.slug}`}>
                 <span>{mainCategory?.title}</span>

@@ -29,10 +29,10 @@ export default async function CategoryPostsPage({
         <>
             <h1>{category.title} Posts</h1>
             {posts.length === 0 && <p>No posts yet for this category</p>}
-            <ul className="list-unstyled">
+            <ul className="list-unstyled card-grid">
               {posts.map((post) => (
                     <li key={post._id}>
-                      <PostCard post={post} />
+                      <PostCard post={post} cardVariantClasses="card--translucent card--bordered" />
                     </li>
               ))}
             </ul>

@@ -7,6 +7,7 @@ import "./globals.css";
 import Footer from "@/components/Globals/Footer/Footer";
 import Header from "@/components/Globals/Header/Header";
 import { AUTHOR_QUERYResult } from "@/types/sanity";
+import SiteSettings from "@/components/Globals/SiteSettings/SiteSettings";
 
 
 // Font files can be colocated inside of `pages`
@@ -26,17 +27,14 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  let settings;
-  const fontClass = settings ? openDyslexicFont.className : '';
-
   return (
-    <html lang="en">
-      <body itemScope itemType="http://schema.org/Person" className={`${fontClass} antialiased`}
+    <html lang="en" style={{ '--font-dyslexic': openDyslexicFont.style.fontFamily } as React.CSSProperties}>
+      <body itemScope itemType="http://schema.org/Person" className="antialiased"
       >
         <div id="top_site">
           <a className="skip-to-content-link" href="#main"> Skip to content </a>
         </div>
+        <SiteSettings />
         <Header author={author} />
         <main id="main">
           {children}

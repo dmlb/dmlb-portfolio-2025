@@ -1,4 +1,4 @@
-.option-heading {
+.optionHeading {
     margin: 0 0 var(--spacer) 0;
     display: block;
     width: 100%;
@@ -6,16 +6,12 @@
     font-weight: var(--weight-medium);
 }
 
-.button-group {
+.buttonGroup {
     display: flex;
     margin: var(--spacer) 0 var(--spacer-l);
 }
 
-button {
-    font-family: inherit;
-}
-
-.button-group .button-group__button {
+.buttonGroupButton {
     text-transform: capitalize;
     height: 4rem;
     min-width: 5rem;
@@ -25,12 +21,9 @@ button {
     flex-wrap: nowrap;
     padding: var(--spacer);
     background: var(--clr-primary);
-    border: 2px solid
-        hsl(
-            var(--clr-primary-hue),
+    border: 2px solid hsl(var(--clr-primary-hue),
             calc(var(--clr-primary-saturation) + 30%),
-            var(--clr-primary-lightness)
-        );
+            var(--clr-primary-lightness));
     border-radius: 0;
     color: var(--canvas-bg);
     font-size: var(--size-h5);
@@ -40,11 +33,9 @@ button {
 
     &:hover,
     &:focus-visible {
-        background: hsl(
-            var(--clr-primary-hue),
-            calc(var(--clr-primary-saturation) + 30%),
-            var(--clr-primary-lightness)
-        );
+        background: hsl(var(--clr-primary-hue),
+                calc(var(--clr-primary-saturation) + 30%),
+                var(--clr-primary-lightness));
     }
 
     &:first-of-type {
@@ -61,24 +52,23 @@ button {
     &.selected,
     &:disabled {
         cursor: not-allowed;
-        background: hsl(
-            var(--clr-primary-hue),
-            calc(var(--clr-primary-saturation) + 10%),
-            calc(var(--clr-primary-lightness) - 25%)
-        );
+        background: hsl(var(--clr-primary-hue),
+                calc(var(--clr-primary-saturation) + 10%),
+                calc(var(--clr-primary-lightness) - 25%));
     }
 }
 
+
 /* preview font selection on button */
-.font-label.system {
+:global([for="font-system"]) {
     font-family: var(--font-system);
 }
 
-.font-label.dyslexic {
+:global([for="font-dyslexic"]) {
     font-family: var(--font-dyslexic);
 }
 
-.form__range-wrapper {
+.formRangeWrapper {
     display: flex;
     align-items: center;
     flex-wrap: wrap;

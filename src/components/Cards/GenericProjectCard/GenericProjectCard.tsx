@@ -7,18 +7,19 @@ import styles from './GenericProjectCard.module.css'
 
 type Props = {
     project: OTHER_STUFF_QUERYResult[0]
+    cardVariantClasses?: string
 }
 
-export default function GenericProjectCard({project}: Props) {
+export default function GenericProjectCard({project, cardVariantClasses}: Props) {
     const {_id, title, description, logo, link, socials} = project;
     return (
-        <article aria-labelledby={_id} className="card card--translucent">
+        <article aria-labelledby={_id} className={`card ${cardVariantClasses}`}>
                 <h3 id={_id} className="card__header">{title}</h3>
                 <div className="card__content">
                     {logo && ( <SanityImage className={styles.cardFloatImg} src={logo} width={150} height={150} alt={logo.alt ?? ''} /> )}
                     {description && <PortableText value={description} />}
                 </div>
-                <div className="card__actions">
+                <div className="card__actions card__actions--wrap">
                     {link && (
                         <a className="button" href={link}>
                             <SocialSVG iconSize={16} socialName="link" />

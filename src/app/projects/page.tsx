@@ -86,11 +86,11 @@ export default async function Endorsements() {
         </form>
 
         {projects && (
-            <ul className={`list-unstyled ${styles.projectsCardList}`}>
+            <ul className={`list-unstyled card-grid`}>
                 {projects.map((project) => (
                     // todo: in:fade animate:flip={{ duration: 200 }}
                     <li key={project._id}>
-                        <TechProjectCard project={project} />
+                        <TechProjectCard project={project} cardVariantClasses="card--translucent card--bordered" />
                     </li>
                 ))}
             </ul>

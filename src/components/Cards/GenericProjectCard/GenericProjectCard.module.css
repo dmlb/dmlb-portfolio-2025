@@ -1,5 +1,10 @@
 .cardFloatImg {
-    float: left;
     border-radius: var(--radi);
     margin-inline-end: var(--spacer-m);
+}
+
+@container main (min-width: 30ch) {
+    .cardFloatImg {
+        float: left;
+    }
 }

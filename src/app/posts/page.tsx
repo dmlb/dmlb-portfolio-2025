@@ -22,10 +22,10 @@ export default async function PostsHome() {
   return (
     <>
       <h1>Posts</h1>
-      <ul className="list-unstyled">
+      <ul className="list-unstyled card-grid">
         {posts.map((post) => (
           <li key={post._id}>
-            <PostCard post={post} />
+            <PostCard post={post} cardVariantClasses="card--translucent card--bordered" />
           </li>
         ))}
       </ul>

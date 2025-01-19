@@ -796,8 +796,28 @@ export type OTHER_STUFF_QUERYResult = Array<{
   };
 }>;
 // Variable: LAST_OTHER_STUFF_QUERY
-// Query: *[_type == "otherProject" && defined(slug.current) && !(_id in path('drafts.**'))]| order(_createdAt desc) [0]{ title,  link,  description,  logo {    _type,    asset,    "alt": asset->altText,  },  "socials": {      linkedin,      discord,      instagram  }}
-export type LAST_OTHER_STUFF_QUERYResult = null;
+// Query: *[_type == "otherProject" && !(_id in path('drafts.**'))]| order(_createdAt desc)[0]{  _id, title,  link,  description,  logo {    _type,    asset,    "alt": asset->altText,  },  "socials": {      linkedin,      discord,      instagram  }}
+export type LAST_OTHER_STUFF_QUERYResult = {
+  _id: string;
+  title: string;
+  link: string | null;
+  description: BlockContent | null;
+  logo: {
+    _type: "image";
+    asset: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    } | null;
+    alt: string | null;
+  } | null;
+  socials: {
+    linkedin: string | null;
+    discord: string | null;
+    instagram: string | null;
+  };
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -826,6 +846,6 @@ declare module "@sanity/client" {
     "*[_type == \"post\" && $slug in categories[]->slug.current && !(_id in path('drafts.**'))]{\n  _id,\n  title,\n  'slug': slug.current,\n  \"categories\": categories[]->{title, \"slug\": slug.current },\n  \"techStack\": techStack[]->{title, icon, \"slug\": slug.current },\n  \"author\": {\n      \"name\": author->name,\n  }\n}": POST_CATEGORY_QUERYResult;
     "*[_type == \"post\" && $slug in techStack[]->slug.current && !(_id in path('drafts.**'))]{\n  _id,\n  title,\n  'slug': slug.current,\n  \"categories\": categories[]->{title, \"slug\": slug.current },\n  \"techStack\": techStack[]->{title, icon, \"slug\": slug.current },\n  \"author\": {\n      \"name\": author->name\n  }\n}": POST_TAG_QUERYResult;
     "*[_type == \"otherProject\" && !(_id in path('drafts.**'))]{\n  _id,\n  title,\n  link,\n  description,\n  logo {\n    _type,\n    asset,\n    \"alt\": asset->altText,\n  },\n  \"socials\": {\n      linkedin,\n      discord,\n      instagram\n  }\n}": OTHER_STUFF_QUERYResult;
-    "*[_type == \"otherProject\" && defined(slug.current) && !(_id in path('drafts.**'))]| order(_createdAt desc) [0]{\n title,\n  link,\n  description,\n  logo {\n    _type,\n    asset,\n    \"alt\": asset->altText,\n  },\n  \"socials\": {\n      linkedin,\n      discord,\n      instagram\n  }\n}": LAST_OTHER_STUFF_QUERYResult;
+    "*[_type == \"otherProject\" && !(_id in path('drafts.**'))]| order(_createdAt desc)[0]{\n  _id,\n title,\n  link,\n  description,\n  logo {\n    _type,\n    asset,\n    \"alt\": asset->altText,\n  },\n  \"socials\": {\n      linkedin,\n      discord,\n      instagram\n  }\n}": LAST_OTHER_STUFF_QUERYResult;
   }
 }

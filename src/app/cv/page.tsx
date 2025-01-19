@@ -58,7 +58,7 @@ export default async function CV() {
             <Accordion isOpen={true} title="Professional Development Courses and Workshops">
                 <ul className={`list-unstyled ${styles.experienceList} ${styles.experienceListColumns}`}>
                     {profDevelopment.map(({ course, year, techStack }) => (
-                    <li key={course}>
+                    <li key={`${course}-${year}`}>
                         <span itemProp="knowsAbout">{course}</span> ({year})
                         {techStack && (
                             <div className={styles.techStackInline}>

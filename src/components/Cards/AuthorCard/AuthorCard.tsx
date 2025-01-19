@@ -3,9 +3,7 @@ import { AUTHOR_CARD_QUERY } from "@/lib/sanity-utils/sanityQueries";
 import { AUTHOR_CARD_QUERYResult } from "@/types/sanity";
 
 import Link from "next/link";
-import SanityImage from "../SanityImage/SanityImage";
-import { PortableText } from "@portabletext/react";
-
+import SanityImage from "../../SanityImage/SanityImage";
 
 
 export default async function AuthorCard() {
@@ -22,12 +20,7 @@ export default async function AuthorCard() {
                 <h2>
                     <Link href="/about">{author.name} ({author.pronouns})</Link>
                 </h2>
-                {author.shortBio && (
-                    <div>
-                        <PortableText
-                            value={author.shortBio} />
-                    </div>
-                )}
+                {author.shortBio && <p>{author.shortBio}</p>}
             </div>
         </div>
     )

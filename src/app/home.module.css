@@ -1,0 +1,6 @@
+.cardWrapper :global(.card) {
+    margin-inline: auto;
+    margin-block: var(--spacer-l);
+    animation: blur-fade-in 450ms ease-in-out both;
+    animation-delay: calc(var(--animation-order) * 200ms);
+}

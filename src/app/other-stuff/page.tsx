@@ -18,7 +18,7 @@ export default async function OtherStuff() {
         {/*style="--animation-order:2"*/}
         {projects.map((project) => (
             <li key={project._id}>
-                <GenericProjectCard project={project} />
+                <GenericProjectCard project={project} cardVariantClasses="card--translucent card--bordered" />
             </li>
         ))}
     </ul>);

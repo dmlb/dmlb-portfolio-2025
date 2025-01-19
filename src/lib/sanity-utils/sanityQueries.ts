@@ -210,7 +210,8 @@ export const OTHER_STUFF_QUERY = defineQuery(`*[_type == "otherProject" && !(_id
   }
 }`)
 
-export const LAST_OTHER_STUFF_QUERY = defineQuery(`*[_type == "otherProject" && defined(slug.current) && !(_id in path('drafts.**'))]| order(_createdAt desc) [0]{
+export const LAST_OTHER_STUFF_QUERY = defineQuery(`*[_type == "otherProject" && !(_id in path('drafts.**'))]| order(_createdAt desc)[0]{
+  _id,
  title,
   link,
   description,
