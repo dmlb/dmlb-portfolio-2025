@@ -2,20 +2,37 @@
 
 import { useEffect, useState, ChangeEvent } from 'react';
 import styles from './SiteSettings.module.css';
-import { SITE_SETTINGS_ATTRIBUTES } from "@/constants/site-settings";
-
+import { SITE_SETTINGS_ATTRIBUTES, SITE_SETTINGS_STORE } from "@/constants/site-settings";
+    
 export default function ReadingWidthRange() {
-    const [currentRange, setCurrentRange] = useState<number>(75);
+    const storeName = SITE_SETTINGS_STORE.readingWidth
+     // getting browser stored value
+     const [storeValue, setStoreValue] = useState<number>(() => {
+        const saved = localStorage.getItem(storeName)
+        const initialValue = saved ? JSON.parse(saved) : null;
+        return +initialValue
+    })
+    // component local store for current option
+    const [currentRange, setCurrentRange] = useState<number>(storeValue || 75);
     const optionMarkers = [35, 45, 65, 75];
 
-    const handleRangeChange = (event: ChangeEvent) => {
-        const el = event.target as HTMLInputElement;
-        setCurrentRange(+el.value);
-    }
-
+    // handle changes to the current option
     useEffect(() => {
         document.documentElement.style.setProperty(SITE_SETTINGS_ATTRIBUTES.readingWidth, `${currentRange}ch`)
     }, [currentRange]);
+
+    // handle changes on browser stored value
+    useEffect(() => {
+        window.localStorage.setItem(storeName, JSON.stringify(storeValue));
+    }, [storeValue]);
+
+    // handle change event on range element
+    const handleRangeChange = (event: ChangeEvent) => {
+        const el = event.target as HTMLInputElement;
+        const value: number = +el.value;
+        setCurrentRange(value);
+        setStoreValue(value);
+    }
 
     return (
         <div className={styles.formRangeWrapper}>

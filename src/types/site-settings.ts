@@ -6,8 +6,10 @@ export type SiteFont = 'system' | 'dyslexic'
 export type SiteAnimation = 'system' | 'on' | 'off'
 
 /** website settings */
+export type SiteSettings = 'mode' | 'font' | 'animation' | 'readingWidth'
 export interface ISiteSettings {
     mode: SiteMode;
     font: SiteFont;
     animation: SiteAnimation;
+    readingWidth: number;
 }

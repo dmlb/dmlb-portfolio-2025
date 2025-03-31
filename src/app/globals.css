@@ -208,6 +208,10 @@ input[type=range] {
 	cursor: pointer;
 }
 
+.form__radio {
+	cursor: inherit !important;
+}
+
 -webkit-slider-container {
 	background-color: var(--clr-accent);
 }

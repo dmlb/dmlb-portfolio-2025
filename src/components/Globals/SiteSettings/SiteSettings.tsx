@@ -1,10 +1,9 @@
 "use client";
 
 import { useRef } from 'react';
-import ThemeModeFieldset from './ThemeModeFieldset';
-import ThemeFontFieldset from './ThemeFontFieldset';
+import { SiteAnimation, SiteFont, SiteMode } from '@/types/site-settings';
+import SiteSettingFieldset from './SiteSettingFieldset';
 import ReadingWidthRange from './ReadingWidthRange';
-import AnimationModeFieldset from './AnimationModeFieldset';
 
 export default function SiteSettings() {
     const dialogRef = useRef<HTMLDialogElement>(null);
@@ -18,10 +17,13 @@ export default function SiteSettings() {
             <button className="button dialog__close" onClick={() => dialogRef?.current?.close()} type="button">X<span className="sr-only">Close</span></button>
 
             <form aria-labelledby="settingsTitle">
-                <ThemeModeFieldset />
-                <ThemeFontFieldset />
+                <SiteSettingFieldset<SiteMode> title="Theme Mode" options={['system', 'light', 'dark']} settingsKey="mode" />
+
+                <SiteSettingFieldset<SiteFont> title="Theme Font" options={['system', 'dyslexic']} settingsKey="font" />
+
                 <ReadingWidthRange />
-                <AnimationModeFieldset />
+
+                <SiteSettingFieldset<SiteAnimation> title="Animation Mode" options={['system', 'on', 'off']} settingsKey="animation" />
             </form>
         </dialog>
     </>)
