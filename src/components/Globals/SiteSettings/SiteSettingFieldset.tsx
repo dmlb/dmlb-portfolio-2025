@@ -12,23 +12,28 @@ export default function SiteSettingFieldset<T>({ title, options, settingsKey}: {
     settingsKey: SiteSettings
 }) {
     const storeName = SITE_SETTINGS_STORE[settingsKey]
-    // getting browser stored value
-    const [storeValue, setStoreValue] = useState(() => {
-        const saved = localStorage.getItem(storeName)
-        const initialValue = saved ? JSON.parse(saved) : null;
-        return initialValue
-    })
+    // state for local storage
+    const [storeValue, setStoreValue] = useState<T | null>(null)
     // component local store for current option
-    const [currentOption, setCurrentOption] = useState(storeValue || options[0]);
+    const [currentOption, setCurrentOption] = useState(options[0]);
+    const activeClasses = styles.buttonGroupButtonActive;
 
-    // handle changes to the current option
+    // handle changes to the current option affecting the styles
     useEffect(() => {
         document.documentElement.setAttribute(SITE_SETTINGS_ATTRIBUTES[settingsKey], `${currentOption}`);
     }, [currentOption]);
 
+    // getting browser stored value
+    useEffect(() => {
+        const saved = localStorage.getItem(storeName)
+        const initialValue = saved ? JSON.parse(saved) : null;
+        setStoreValue(initialValue);
+        setCurrentOption(initialValue ?? options[0]);
+    }, [setStoreValue]);
+
     // handle changes on browser stored value
     useEffect(() => {
-        window.localStorage.setItem(storeName, JSON.stringify(storeValue));
+        localStorage.setItem(storeName, JSON.stringify(storeValue));
     }, [storeValue]);
 
     // handle click event on radio buttons
@@ -42,7 +47,7 @@ export default function SiteSettingFieldset<T>({ title, options, settingsKey}: {
             <legend className={styles.optionHeading}>{title}</legend>
 
             {options.map((option) => (
-                <div key={`${option}`} className={`form__radio-wrapper ${styles.buttonGroupButton} ${currentOption === option ? styles.buttonGroupButtonActive : ''}`}>
+                <div key={`${option}`} className={`form__radio-wrapper ${styles.buttonGroupButton} ${currentOption === option ? activeClasses : ''}`}>
                     <input
                         className="form__radio"
                         type="radio"

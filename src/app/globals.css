@@ -541,11 +541,6 @@ a:not(.button, .card__link, .skip-to-content-link) {
 	margin-top: var(--spacer-l);
 }
 
-.card:has(.card__link, .button, a):hover,
-.card:focus-within {
-	transform: scale(1.1);
-}
-
 .card.card--bordered {
 	border-color: var(--clr-secondary);
 }
@@ -711,6 +706,21 @@ dialog[open]::backdrop {
 	--card-translucent-bg-opacity: .05;
 }
 
+@media (prefers-color-scheme: light) {
+	[data-mode="system"] {
+		--canvas-bg: var(--clr-white);
+		--canvas-txt: var(--clr-black);
+
+		--clr-gray: #565656;
+
+		--clr-primary-lightness: 47%;
+		--clr-secondary-lightness: 19%;
+		--clr-accent-lightness: 39%;
+
+		--card-translucent-bg-opacity: .05;
+	}
+}
+
 /* remove animations */
 /* ======================================= */
 [data-animation="off"] {
@@ -720,5 +730,17 @@ dialog[open]::backdrop {
 	::view-transition-new(*) {
 		animation: none !important;
 		transition: none !important;
+	}
+}
+
+@media (prefers-reduced-motion) {
+	[data-animation="system"] {
+		*,
+		::view-transition-group(*),
+		::view-transition-old(*),
+		::view-transition-new(*) {
+			animation: none !important;
+			transition: none !important;
+		}
 	}
 }

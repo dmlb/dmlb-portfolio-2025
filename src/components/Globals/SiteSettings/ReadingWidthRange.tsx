@@ -6,20 +6,24 @@ import { SITE_SETTINGS_ATTRIBUTES, SITE_SETTINGS_STORE } from "@/constants/site-
     
 export default function ReadingWidthRange() {
     const storeName = SITE_SETTINGS_STORE.readingWidth
-     // getting browser stored value
-     const [storeValue, setStoreValue] = useState<number>(() => {
-        const saved = localStorage.getItem(storeName)
-        const initialValue = saved ? JSON.parse(saved) : null;
-        return +initialValue
-    })
+    // state for local storage
+    const [storeValue, setStoreValue] = useState<number | null>(null);
     // component local store for current option
-    const [currentRange, setCurrentRange] = useState<number>(storeValue || 75);
+    const [currentRange, setCurrentRange] = useState<number>(75);
     const optionMarkers = [35, 45, 65, 75];
 
-    // handle changes to the current option
+    // handle changes to the current option affecting the styles
     useEffect(() => {
         document.documentElement.style.setProperty(SITE_SETTINGS_ATTRIBUTES.readingWidth, `${currentRange}ch`)
     }, [currentRange]);
+
+    // getting browser stored value
+    useEffect(() => {
+        const saved = localStorage.getItem(storeName)
+        const initialValue = saved ? JSON.parse(saved) : null;
+        setStoreValue(initialValue);
+        setCurrentRange(initialValue ?? 75);
+    }, [setStoreValue]);
 
     // handle changes on browser stored value
     useEffect(() => {

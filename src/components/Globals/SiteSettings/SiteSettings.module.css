@@ -74,3 +74,15 @@
     flex-wrap: wrap;
     gap: var(--spacer-s);
 }
+
+.settingsTriggerPosition {
+    padding: .325rem .5rem;
+}
+
+@media screen and (min-width: 560px) {
+    .settingsTriggerPosition {
+        position: fixed;
+        right: 0;
+        z-index: 1000;
+    }
+}
