@@ -22,3 +22,16 @@
         }
     }
 }
+
+:global([data-motion="off"]) {
+    .endorsementsList li {
+        animation: unset !important;
+    }
+}
+
+
+@media (prefers-reduced-motion) {
+    .endorsementsList li {
+        animation: unset !important;
+    }
+}

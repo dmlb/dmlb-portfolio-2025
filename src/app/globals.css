@@ -369,45 +369,23 @@ a:not(.button, .card__link, .skip-to-content-link) {
 	border-radius: var(--btn-radius, var(--radi-m));
 	color: var(--btn-clr, var(--canvas-bg));
 	font-size: var(--btn-text-size, var(--size-h6));
-	transition: all 300ms ease-in-out;
+	transition: all 500ms ease-in-out;
 	gap: var(--spacer-s);
 
 	--icon-fill: var(--btn-clr, var(--canvas-bg));
 
-	&::before {
-		content: '';
-		display: block;
-		position: absolute;
-		inset: 0;
-		z-index: -1;
-		background-color: var(--btn-shadow, var(--canvas-txt));
-		border-radius: var(--btn-radius, var(--radi-m));
-		opacity: 0.9;
-		transition: transform 200ms ease 20ms;
-	}
-
 	&:hover,
 	&:focus-visible {
-		transform: scale(1.05), translate(6px, -6px);
-
 		--btn-bg: hsl(var(--clr-primary-hue),
 				calc(var(--clr-primary-saturation) + 30%),
 				var(--clr-primary-lightness));
-
-		&::before {
-			transform: translate(-6px, 6px);
-		}
+		--btn-border: var(--canvas-txt);
 	}
 
 	&:active {
 		--btn-bg: hsl(var(--clr-primary-hue),
 				calc(var(--clr-primary-saturation) + 30%),
 				calc(var(--clr-primary-lightness) - 5%));
-
-		&::before {
-			opacity: 0.5;
-			transform: translate(-2px, 2px);
-		}
 	}
 
 	&+.button {
@@ -466,17 +444,31 @@ a:not(.button, .card__link, .skip-to-content-link) {
 
 	&:hover,
 	&:focus-visible {
-		transform: scale(1.3);
 		--btn-bg: var(--canvas-bg);
+		--btn-border: var(--canvas-txt);
 	}
 }
 
 .button.button--icon.button--accent {
 	--btn-clr: var(--clr-accent);
+
+	&:hover,
+	&:focus-visible {
+		--btn-clr: hsl(var(--clr-accent-hue),
+				calc(var(--clr-accent-saturation) + 30%),
+				calc(var(--clr-accent-lightness) - 10%));
+	}
 }
 
 .button.button--icon.button--secondary {
 	--btn-clr: var(--clr-secondary);
+
+	&:hover,
+	&:focus-visible {
+		--btn-clr: hsl(var(--clr-secondary-hue),
+			calc(var(--clr-secondary-saturation) + 30%),
+			calc(var(--clr-secondary-lightness) - 5%));
+	}
 }
 
 /* forms / inputs */
@@ -506,7 +498,7 @@ a:not(.button, .card__link, .skip-to-content-link) {
 	position: relative;
 	border-radius: var(--radi);
 	background-color: var(--canvas-bg);
-	border: 1px solid transparent;
+	border: 1px solid var(--card-border-clr, transparent);
 	padding: var(--spacer-m);
 	width: var(--card-width, clamp(var(--container-s), 45ch, var(--container-m)));
 	max-width: 100%;
@@ -537,12 +529,17 @@ a:not(.button, .card__link, .skip-to-content-link) {
 	}
 }
 
+.card:has(.card__link):hover,
+.card:has(.card__link):focus-within {
+	--card-border-clr: var(--clr-accent);
+}
+
 .card+.card {
 	margin-top: var(--spacer-l);
 }
 
 .card.card--bordered {
-	border-color: var(--clr-secondary);
+	--card-border-clr: var(--clr-secondary);
 }
 
 .card.card--translucent {
@@ -574,11 +571,6 @@ a:not(.button, .card__link, .skip-to-content-link) {
 	letter-spacing: var(--letter-space-m);
 	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 	text-transform: uppercase;
-}
-
-[data-mode="light"] .card__category {
-	background-color: var(--canvas-bg);
-	padding: var(--spacer-s);
 }
 
 .card-grid {
@@ -671,15 +663,14 @@ dialog[open]::backdrop {
 	z-index: 30;
 	padding: var(--spacer);
 	width: max(fit-content, 300px);
-	transform: translateY(-20px);
-	transition: all 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
+	transform: translateY(-10px);
+	transition: all 600ms cubic-bezier(0.25, 0.8, 0.25, 1), opacity 200ms linear;
 }
 
 [data-tooltip]:hover::after,
 [data-tooltip]:focus-visible::after {
 	opacity: 1;
 	transform: translateY(0);
-	transition-duration: 300ms;
 }
 
 
@@ -704,6 +695,11 @@ dialog[open]::backdrop {
 	--clr-accent-lightness: 39%;
 
 	--card-translucent-bg-opacity: .05;
+
+	.card__category {
+		background-color: var(--canvas-bg);
+		padding: var(--spacer-s);
+	}
 }
 
 @media (prefers-color-scheme: light) {
@@ -718,29 +714,53 @@ dialog[open]::backdrop {
 		--clr-accent-lightness: 39%;
 
 		--card-translucent-bg-opacity: .05;
+
+		.card__category {
+			background-color: var(--canvas-bg);
+			padding: var(--spacer-s);
+		}
 	}
 }
 
 /* remove animations */
 /* ======================================= */
-[data-animation="off"] {
-	*,
+
+[data-motion="off"] {
 	::view-transition-group(*),
 	::view-transition-old(*),
 	::view-transition-new(*) {
-		animation: none !important;
-		transition: none !important;
+			animation: unset !important;
+			transition: unset !important;
+			transform: unset !important;
+	}
+
+	a,
+	.button,
+	.card,
+	[data-tooltip]::after {
+		transform: unset !important;
+		transition: unset !important;
 	}
 }
 
 @media (prefers-reduced-motion) {
-	[data-animation="system"] {
-		*,
-		::view-transition-group(*),
-		::view-transition-old(*),
-		::view-transition-new(*) {
-			animation: none !important;
-			transition: none !important;
-		}
+	*,
+	*::after,
+	*::before,
+	::view-transition-group(*),
+	::view-transition-old(*),
+	::view-transition-new(*) {
+		animation: unset !important;
+		transition: unset !important;
+		transform: unset !important;
 	}
+
+	a,
+	.button,
+	.card,
+	[data-tooltip]::after {
+		transform: unset !important;
+		transition: unset !important;
+	}
+
 }

@@ -4,3 +4,16 @@
     animation: blur-fade-in 450ms ease-in-out both;
     animation-delay: calc(var(--animation-order) * 200ms);
 }
+
+:global([data-motion="off"]) {
+    .cardWrapper :global(.card) {
+        animation: unset !important;
+    }
+}
+
+
+@media (prefers-reduced-motion) {
+    .cardWrapper :global(.card) {
+        animation: unset !important;
+    }
+}

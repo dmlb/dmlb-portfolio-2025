@@ -21,24 +21,26 @@
         display: block;
         margin: var(--spacer) 0;
     }
+}
 
-    & cite .details {
-        display: block;
-        font-size: var(--size-micro);
-        color: var(--clr-gray);
-        font-style: normal;
-    }
 
-    & cite .name {
-        font-size: var(--size-small);
-    }
-    
-    & cite .position {
-        text-transform: uppercase;
-        letter-spacing: var(--letter-space-m);
-    }
-    
-    & cite .company {
-        display: block;
-    }
+.details {
+    display: block;
+    font-size: var(--size-micro);
+    color: var(--clr-gray);
+    font-style: normal;
+}
+
+.name {
+    display: block;
+    font-size: var(--size-small);
+}
+
+.position {
+    text-transform: uppercase;
+    letter-spacing: var(--letter-space-m);
+}
+
+.company {
+    display: block;
 }
