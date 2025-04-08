@@ -30,6 +30,18 @@ export default defineType({
       })
     }),
     defineField({
+      name: 'startYear',
+      title: 'Start Year',
+      type: 'string',
+      validation: (rule) => rule.required().min(4).max(4),
+    }),
+    defineField({
+      name: 'endYear',
+      title: 'End Year',
+      type: 'string',
+      validation: (rule) => rule.min(4).max(4),
+    }),
+    defineField({
       name: 'categories',
       title: 'Categories',
       type: 'array',
@@ -44,11 +56,6 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'publishedAt',
-      title: 'Published at',
-      type: 'datetime',
-    }),
-    defineField({
       name: 'body',
       title: 'Body',
       type: 'blockContent',
@@ -57,13 +64,19 @@ export default defineType({
   preview: {
     select: {
       title: 'title',
-      categories: 'categories',
+      topCategory: 'categories.0.title',
+      startYear: 'startYear',
+      endYear: 'endYear',
     },
     prepare(selection) {
-      const { categories } = selection
+      const { startYear, endYear, topCategory } = selection
+      const endVal = endYear ? endYear : 'Current'
+      const sameYear = startYear === endYear
+      const yearRange = sameYear ? startYear : `${startYear} - ${endVal}`
+
       return {
         ...selection,
-        subtitle: categories.map((category: { title: string }) => category.title).join(', '),
+        subtitle:`${topCategory} | ${yearRange}`,
       }
     }
   },

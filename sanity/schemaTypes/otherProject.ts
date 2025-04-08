@@ -20,6 +20,18 @@ export default defineType({
             },
         }),
         defineField({
+            name: 'startYear',
+            title: 'Start Year',
+            type: 'string',
+            validation: (rule) => rule.required().min(4).max(4),
+        }),
+        defineField({
+            name: 'endYear',
+            title: 'End Year',
+            type: 'string',
+            validation: (rule) => rule.min(4).max(4),
+        }),
+        defineField({
             name: 'link',
             title: 'Link',
             type: 'url',
@@ -59,7 +71,20 @@ export default defineType({
     ],
     preview: {
         select: {
-            title: 'title',
+          title: 'title',
+          startYear: 'startYear',
+          endYear: 'endYear',
+        },
+        prepare(selection) {
+          const { startYear, endYear } = selection
+          const endVal = endYear ? endYear : 'Current'
+          const sameYear = startYear === endYear
+          const yearRange = sameYear ? startYear : `${startYear} - ${endVal}`
+    
+          return {
+            ...selection,
+            subtitle:`${yearRange}`,
+          }
         }
-    },
+      },
 })
