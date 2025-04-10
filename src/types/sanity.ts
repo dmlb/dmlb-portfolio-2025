@@ -229,6 +229,8 @@ export type TechProject = {
   title: string;
   slug: Slug;
   projectLink: string;
+  startYear: string;
+  endYear?: string;
   categories: Array<{
     _ref: string;
     _type: "reference";
@@ -243,7 +245,6 @@ export type TechProject = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "techStack";
   }>;
-  publishedAt?: string;
   body?: BlockContent;
 };
 
@@ -265,6 +266,8 @@ export type OtherProject = {
     crop?: SanityImageCrop;
     _type: "image";
   };
+  startYear: string;
+  endYear?: string;
   link?: string;
   discord?: string;
   instagram?: string;
@@ -642,7 +645,7 @@ export type TAGS_SLUG_QUERYResult = {
   title: string;
 } | null;
 // Variable: PROJECTS_QUERY
-// Query: *[_type == "techProject" && defined(slug.current) && !(_id in path('drafts.**'))]{  _id, title, 'slug': slug.current, projectLink,  "categories": categories[]->{title, "slug": slug.current },  "techStack": techStack[]->{title, icon, "slug": slug.current }}
+// Query: *[_type == "techProject" && defined(slug.current) && !(_id in path('drafts.**'))]| order(endYear desc){  _id, title, 'slug': slug.current, projectLink,  "categories": categories[]->{title, "slug": slug.current },  "techStack": techStack[]->{title, icon, "slug": slug.current }}
 export type PROJECTS_QUERYResult = Array<{
   _id: string;
   title: string;
@@ -659,12 +662,32 @@ export type PROJECTS_QUERYResult = Array<{
   }>;
 }>;
 // Variable: LAST_PROJECT_QUERY
-// Query: *[_type == "techProject" && defined(slug.current) && !(_id in path('drafts.**'))]| order(_createdAt desc) [0]{  _id, title, 'slug': slug.current, projectLink,  "categories": categories[]->{title, "slug": slug.current },  "techStack": techStack[]->{title, icon, "slug": slug.current }}
+// Query: *[_type == "techProject" && defined(slug.current) && !(_id in path('drafts.**'))]| order(endYear desc) [0]{  _id, title, 'slug': slug.current, projectLink,  "categories": categories[]->{title, "slug": slug.current },  "techStack": techStack[]->{title, icon, "slug": slug.current }}
 export type LAST_PROJECT_QUERYResult = {
   _id: string;
   title: string;
   slug: string;
   projectLink: string;
+  categories: Array<{
+    title: string;
+    slug: string;
+  }>;
+  techStack: Array<{
+    title: string;
+    icon: IconPicker | null;
+    slug: string;
+  }>;
+} | null;
+// Variable: PROJECT_SLUG_QUERY
+// Query: *[_type == "techProject" && slug.current == $slug && !(_id in path('drafts.**'))][0]{  _id,   title,   'slug': slug.current,   projectLink,  startYear,  endYear,  description,  "categories": categories[]->{title, "slug": slug.current },  "techStack": techStack[]->{title, icon, "slug": slug.current }}
+export type PROJECT_SLUG_QUERYResult = {
+  _id: string;
+  title: string;
+  slug: string;
+  projectLink: string;
+  startYear: string;
+  endYear: string | null;
+  description: null;
   categories: Array<{
     title: string;
     slug: string;
@@ -773,12 +796,14 @@ export type POST_TAG_QUERYResult = Array<{
   };
 }>;
 // Variable: OTHER_STUFF_QUERY
-// Query: *[_type == "otherProject" && !(_id in path('drafts.**'))]{  _id,  title,  link,  description,  logo {    _type,    asset,    "alt": asset->altText,  },  "socials": {      linkedin,      discord,      instagram  }}
+// Query: *[_type == "otherProject" && !(_id in path('drafts.**'))]{  _id,  title,  link,  description,  startYear,  endYear,  logo {    _type,    asset,    "alt": asset->altText,  },  "socials": {      linkedin,      discord,      instagram  }}
 export type OTHER_STUFF_QUERYResult = Array<{
   _id: string;
   title: string;
   link: string | null;
   description: BlockContent | null;
+  startYear: string;
+  endYear: string | null;
   logo: {
     _type: "image";
     asset: {
@@ -796,7 +821,7 @@ export type OTHER_STUFF_QUERYResult = Array<{
   };
 }>;
 // Variable: LAST_OTHER_STUFF_QUERY
-// Query: *[_type == "otherProject" && !(_id in path('drafts.**'))]| order(_createdAt desc)[0]{  _id, title,  link,  description,  logo {    _type,    asset,    "alt": asset->altText,  },  "socials": {      linkedin,      discord,      instagram  }}
+// Query: *[_type == "otherProject" && !(_id in path('drafts.**'))]| order(endYear desc)[0]{  _id, title,  link,  description,  logo {    _type,    asset,    "alt": asset->altText,  },  "socials": {      linkedin,      discord,      instagram  }}
 export type LAST_OTHER_STUFF_QUERYResult = {
   _id: string;
   title: string;
@@ -838,14 +863,15 @@ declare module "@sanity/client" {
     "*[_type == \"category\" && slug.current == $slug && !(_id in path('drafts.**'))][0]{\n  _id, title\n}": CATEGORIES_SLUG_QUERYResult;
     "*[_type == \"techStack\" && defined(slug.current) && !(_id in path('drafts.**'))]{\n  _id, title, 'slug': slug.current, icon\n}": TAGS_QUERYResult;
     "*[_type == \"techStack\" && slug.current == $slug && !(_id in path('drafts.**'))][0]{\n  _id, title\n}": TAGS_SLUG_QUERYResult;
-    "*[_type == \"techProject\" && defined(slug.current) && !(_id in path('drafts.**'))]{\n  _id, title, 'slug': slug.current, projectLink,\n  \"categories\": categories[]->{title, \"slug\": slug.current },\n  \"techStack\": techStack[]->{title, icon, \"slug\": slug.current }\n}": PROJECTS_QUERYResult;
-    "*[_type == \"techProject\" && defined(slug.current) && !(_id in path('drafts.**'))]| order(_createdAt desc) [0]{\n  _id, title, 'slug': slug.current, projectLink,\n  \"categories\": categories[]->{title, \"slug\": slug.current },\n  \"techStack\": techStack[]->{title, icon, \"slug\": slug.current }\n}": LAST_PROJECT_QUERYResult;
+    "*[_type == \"techProject\" && defined(slug.current) && !(_id in path('drafts.**'))]| order(endYear desc){\n  _id, title, 'slug': slug.current, projectLink,\n  \"categories\": categories[]->{title, \"slug\": slug.current },\n  \"techStack\": techStack[]->{title, icon, \"slug\": slug.current }\n}": PROJECTS_QUERYResult;
+    "*[_type == \"techProject\" && defined(slug.current) && !(_id in path('drafts.**'))]| order(endYear desc) [0]{\n  _id, title, 'slug': slug.current, projectLink,\n  \"categories\": categories[]->{title, \"slug\": slug.current },\n  \"techStack\": techStack[]->{title, icon, \"slug\": slug.current }\n}": LAST_PROJECT_QUERYResult;
+    "*[_type == \"techProject\" && slug.current == $slug && !(_id in path('drafts.**'))][0]{\n  _id, \n  title, \n  'slug': slug.current, \n  projectLink,\n  startYear,\n  endYear,\n  description,\n  \"categories\": categories[]->{title, \"slug\": slug.current },\n  \"techStack\": techStack[]->{title, icon, \"slug\": slug.current }\n}": PROJECT_SLUG_QUERYResult;
     "*[_type == \"post\" && defined(slug.current) && !(_id in path('drafts.**'))]{\n    _id, title, 'slug': slug.current,\n    \"categories\": categories[]->{title, \"slug\": slug.current },\n    \"techStack\": techStack[]->{title, icon, \"slug\": slug.current }\n  }": POSTS_QUERYResult;
     "*[_type == \"post\" && defined(slug.current) && !(_id in path('drafts.**'))]| order(_createdAt desc) [0]{\n  _id, title, 'slug': slug.current,\n  \"categories\": categories[]->{title, \"slug\": slug.current },\n  \"techStack\": techStack[]->{title, icon, \"slug\": slug.current }\n}": LAST_POST_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug && !(_id in path('drafts.**'))][0]{\n    title,\n    mainImage {\n      _type,\n      asset,\n      \"alt\": asset->altText,\n    },\n    _createdAt,\n    _updatedAt,\n    body,\n    \"categories\": categories[]->{title, \"slug\": slug.current },\n   \"techStack\": techStack[]->{title, icon, \"slug\": slug.current }\n  }": POST_SLUG_QUERYResult;
     "*[_type == \"post\" && $slug in categories[]->slug.current && !(_id in path('drafts.**'))]{\n  _id,\n  title,\n  'slug': slug.current,\n  \"categories\": categories[]->{title, \"slug\": slug.current },\n  \"techStack\": techStack[]->{title, icon, \"slug\": slug.current },\n  \"author\": {\n      \"name\": author->name,\n  }\n}": POST_CATEGORY_QUERYResult;
     "*[_type == \"post\" && $slug in techStack[]->slug.current && !(_id in path('drafts.**'))]{\n  _id,\n  title,\n  'slug': slug.current,\n  \"categories\": categories[]->{title, \"slug\": slug.current },\n  \"techStack\": techStack[]->{title, icon, \"slug\": slug.current },\n  \"author\": {\n      \"name\": author->name\n  }\n}": POST_TAG_QUERYResult;
-    "*[_type == \"otherProject\" && !(_id in path('drafts.**'))]{\n  _id,\n  title,\n  link,\n  description,\n  logo {\n    _type,\n    asset,\n    \"alt\": asset->altText,\n  },\n  \"socials\": {\n      linkedin,\n      discord,\n      instagram\n  }\n}": OTHER_STUFF_QUERYResult;
-    "*[_type == \"otherProject\" && !(_id in path('drafts.**'))]| order(_createdAt desc)[0]{\n  _id,\n title,\n  link,\n  description,\n  logo {\n    _type,\n    asset,\n    \"alt\": asset->altText,\n  },\n  \"socials\": {\n      linkedin,\n      discord,\n      instagram\n  }\n}": LAST_OTHER_STUFF_QUERYResult;
+    "*[_type == \"otherProject\" && !(_id in path('drafts.**'))]{\n  _id,\n  title,\n  link,\n  description,\n  startYear,\n  endYear,\n  logo {\n    _type,\n    asset,\n    \"alt\": asset->altText,\n  },\n  \"socials\": {\n      linkedin,\n      discord,\n      instagram\n  }\n}": OTHER_STUFF_QUERYResult;
+    "*[_type == \"otherProject\" && !(_id in path('drafts.**'))]| order(endYear desc)[0]{\n  _id,\n title,\n  link,\n  description,\n  logo {\n    _type,\n    asset,\n    \"alt\": asset->altText,\n  },\n  \"socials\": {\n      linkedin,\n      discord,\n      instagram\n  }\n}": LAST_OTHER_STUFF_QUERYResult;
   }
 }

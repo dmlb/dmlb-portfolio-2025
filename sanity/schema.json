@@ -1332,6 +1332,20 @@
         },
         "optional": false
       },
+      "startYear": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": false
+      },
+      "endYear": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "categories": {
         "type": "objectAttribute",
         "value": {
@@ -1419,13 +1433,6 @@
           }
         },
         "optional": false
-      },
-      "publishedAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
       },
       "body": {
         "type": "objectAttribute",
@@ -1538,6 +1545,20 @@
               }
             }
           }
+        },
+        "optional": true
+      },
+      "startYear": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": false
+      },
+      "endYear": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
         },
         "optional": true
       },

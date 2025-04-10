@@ -477,7 +477,8 @@ a:not(.button, .card__link, .skip-to-content-link) {
 	text-transform: capitalize;
 }
 
-.form__radio-wrapper {
+.form__radio-wrapper,
+.form__input-wrapper {
 	position: relative;
 	display: inline-flex;
 	align-items: center;

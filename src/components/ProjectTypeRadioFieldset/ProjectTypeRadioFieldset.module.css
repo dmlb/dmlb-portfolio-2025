@@ -1,0 +1,9 @@
+.formRadioGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacer);
+    margin-block: var(--spacer);
+
+    --icon-stroke: var(--clr-accent);
+    --icon-fill: var(--clr-accent);
+}

@@ -1,0 +1,19 @@
+.projectsForm {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacer-m);
+    margin-bottom: var(--spacer-l);
+
+    & details {
+        width: 100%;
+    }
+}
+
+.formStatus {
+    font-size: var(--size-h3);
+}
+
+.capitalize {
+    text-transform: capitalize;
+}

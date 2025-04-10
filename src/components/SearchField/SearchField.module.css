@@ -1,15 +1,3 @@
-.projectsForm {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: var(--spacer-m);
-    margin-bottom: var(--spacer-l);
-
-    & details {
-        width: 100%;
-    }
-}
-
 .formReset {
     background-color: var(--btn-bg, transparent);
     border: 2px solid var(--clr-accent);
@@ -31,14 +19,4 @@
             calc(var(--clr-accent-saturation) + 30%),
             var(--clr-accent-lightness));
     }
-}
-
-.formRadioGroup {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacer);
-    margin-block: var(--spacer);
-
-    --icon-stroke: var(--clr-accent);
-    --icon-fill: var(--clr-accent);
 }

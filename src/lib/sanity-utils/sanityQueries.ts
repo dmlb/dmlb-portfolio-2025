@@ -134,14 +134,26 @@ export const TAGS_SLUG_QUERY = defineQuery(`*[_type == "techStack" && slug.curre
   _id, title
 }`)
 
-export const PROJECTS_QUERY = defineQuery(`*[_type == "techProject" && defined(slug.current) && !(_id in path('drafts.**'))]{
+export const PROJECTS_QUERY = defineQuery(`*[_type == "techProject" && defined(slug.current) && !(_id in path('drafts.**'))]| order(endYear desc){
   _id, title, 'slug': slug.current, projectLink,
   "categories": categories[]->{title, "slug": slug.current },
   "techStack": techStack[]->{title, icon, "slug": slug.current }
 }`)
 
-export const LAST_PROJECT_QUERY = defineQuery(`*[_type == "techProject" && defined(slug.current) && !(_id in path('drafts.**'))]| order(_createdAt desc) [0]{
+export const LAST_PROJECT_QUERY = defineQuery(`*[_type == "techProject" && defined(slug.current) && !(_id in path('drafts.**'))]| order(endYear desc) [0]{
   _id, title, 'slug': slug.current, projectLink,
+  "categories": categories[]->{title, "slug": slug.current },
+  "techStack": techStack[]->{title, icon, "slug": slug.current }
+}`)
+
+export const PROJECT_SLUG_QUERY = defineQuery(`*[_type == "techProject" && slug.current == $slug && !(_id in path('drafts.**'))][0]{
+  _id, 
+  title, 
+  'slug': slug.current, 
+  projectLink,
+  startYear,
+  endYear,
+  description,
   "categories": categories[]->{title, "slug": slug.current },
   "techStack": techStack[]->{title, icon, "slug": slug.current }
 }`)
@@ -198,6 +210,8 @@ export const OTHER_STUFF_QUERY = defineQuery(`*[_type == "otherProject" && !(_id
   title,
   link,
   description,
+  startYear,
+  endYear,
   logo {
     _type,
     asset,
@@ -210,7 +224,7 @@ export const OTHER_STUFF_QUERY = defineQuery(`*[_type == "otherProject" && !(_id
   }
 }`)
 
-export const LAST_OTHER_STUFF_QUERY = defineQuery(`*[_type == "otherProject" && !(_id in path('drafts.**'))]| order(_createdAt desc)[0]{
+export const LAST_OTHER_STUFF_QUERY = defineQuery(`*[_type == "otherProject" && !(_id in path('drafts.**'))]| order(endYear desc)[0]{
   _id,
  title,
   link,
