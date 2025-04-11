@@ -9,7 +9,7 @@ export default function Footer() {
                     This site is a member of the <a rel="external" href="https://a11y-webring.club/"
                     >a11y-webring.club</a>.
                 </p>
-                <ul className={`list-unstyled ${styles.a11yWebringList}`}>
+                <ul data-testid="webring-links" className={`list-unstyled ${styles.a11yWebringList}`}>
                     <li>
                         <a rel="external" referrerPolicy="strict-origin" href="https://a11y-webring.club/prev"
                         >Previous website</a>

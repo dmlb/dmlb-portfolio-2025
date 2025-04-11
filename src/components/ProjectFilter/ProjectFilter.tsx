@@ -7,7 +7,7 @@ import styles from './ProjectFilter.module.css';
 import Accordion from "@/components/Accordion/Accordion";
 import { PROJECT_TYPE_QUERYResult, PROJECTS_QUERYResult } from "@/types/sanity";
 import ProjectList from "../ProjectList/ProjectList";
-import SearchField from "../SearchField/SearchFrield";
+import SearchField from "../SearchField/SearchField";
 import ProjectTypeRadioFieldset from "../ProjectTypeRadioFieldset/ProjectTypeRadioFieldset";
 
 type Props = {

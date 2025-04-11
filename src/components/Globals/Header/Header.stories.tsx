@@ -1,9 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { userEvent, within, expect } from '@storybook/test';
+import { within, expect } from '@storybook/test';
 
-import { MAIN_NAV } from '@/constants/navigation';
 import Header from './Header';
-
 
 const meta = {
   title: 'Header',
@@ -12,8 +10,7 @@ const meta = {
     author: {
         name: 'Danielle',
         title: 'Software Engineer',
-    },
-    navigation: MAIN_NAV
+    }
   },
 } satisfies Meta<typeof Header>;
 
@@ -32,12 +29,6 @@ export const GlobalHeader: Story = {
 
         const title = canvas.getByText(`${args?.author?.title}`);
         expect(title).toBeInTheDocument();
-
-
-        const navLinks = canvas.getAllByRole('link');
-        navLinks.forEach(async (link) => {
-            await userEvent.click(link);
-        })
     }
 };
 

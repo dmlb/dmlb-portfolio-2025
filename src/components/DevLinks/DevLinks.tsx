@@ -3,9 +3,9 @@ import SocialSVG from '../SocialSVG/SocialSVG';
 
 type Props = {
     socialsOnly: boolean;
-    hideResume: boolean;
-    resumePdfUrl: string | null;
-    socials: {
+    hideResume?: boolean;
+    resumePdfUrl?: string | null;
+    socials?: {
         linkedin: string | null;
         codepen: string | null;
         github: string | null;

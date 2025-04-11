@@ -18,7 +18,10 @@ export default function SiteSettings() {
         <dialog ref={dialogRef} data-testid="global-settings-dialog" aria-labelledby="settingsTitle">
             <h2 className="dialog__title" id="settingsTitle">Site Settings</h2>
 
-            <button className="button dialog__close" onClick={() => dialogRef?.current?.close()} type="button">X<span className="sr-only">Close</span></button>
+            <button className="button dialog__close" onClick={() => dialogRef?.current?.close()} type="button">
+                <span aria-hidden="true">X</span>
+                <span className="sr-only">Close</span>
+            </button>
 
             <form aria-labelledby="settingsTitle">
                 <SiteSettingFieldset<SiteMode> title="Theme Mode" options={['system', 'light', 'dark']} settingsKey="mode" />
