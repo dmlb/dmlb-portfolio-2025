@@ -1,4 +1,4 @@
 .skillIcon {
     display: inline-block;
-    color: var(--clr-secondary);
+    color: var(--skill-icon-fill, var(--clr-secondary));
 }

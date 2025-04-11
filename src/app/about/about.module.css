@@ -36,6 +36,15 @@
     gap: var(--spacer-m);
 }
 
+.skillLink {
+    border-bottom: unset !important;
+
+    &:hover,
+    &:focus-visible {
+        --skill-icon-fill: var(--clr-accent);
+    }
+}
+
 @container main (min-width: 960px) {
     .wrapper {
         display: grid;

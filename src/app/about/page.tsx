@@ -3,14 +3,15 @@ import { PortableText } from "@portabletext/react";
 
 import sanityClient from "@/lib/sanity-utils/sanityClient";
 import { ABOUT_QUERY, TAGS_QUERY } from "@/lib/sanity-utils/sanityQueries";
+import { ABOUT_QUERYResult, TAGS_QUERYResult } from "@/types/sanity";
 import DevLinks from "@/components/DevLinks/DevLinks";
 import SkillIcon from "@/components/SkillIcon/SkillIcon";
 
 import styles from "./about.module.css";
 
 export default async function About() {
-    const skills = await sanityClient.fetch(TAGS_QUERY);
-    const about = await sanityClient.fetch(ABOUT_QUERY);
+    const skills: TAGS_QUERYResult = await sanityClient.fetch(TAGS_QUERY);
+    const about: ABOUT_QUERYResult = await sanityClient.fetch(ABOUT_QUERY);
 
     if (!about) {
         return null;
@@ -61,7 +62,10 @@ export default async function About() {
                     {skills.map((skill) => {
                         return (
                             <li key={skill._id}>
-                                <SkillIcon {...skill} size={48}  />
+								{/* TODO */}
+								<Link href={`/projects/tech-stack/${skill.slug}`} className={styles.skillLink}>
+                                	<SkillIcon {...skill} size={48}  />
+								</Link>
                             </li>
                         );
                     })}

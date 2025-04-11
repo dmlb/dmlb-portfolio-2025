@@ -126,7 +126,7 @@ export const CATEGORIES_SLUG_QUERY = defineQuery(`*[_type == "category" && slug.
   _id, title
 }`)
 
-export const TAGS_QUERY = defineQuery(`*[_type == "techStack" && defined(slug.current) && !(_id in path('drafts.**'))]{
+export const TAGS_QUERY = defineQuery(`*[_type == "techStack" && defined(slug.current) && !(_id in path('drafts.**'))]| order(lower(title) asc){
   _id, title, 'slug': slug.current, icon
 }`)
 
@@ -154,6 +154,12 @@ export const PROJECT_SLUG_QUERY = defineQuery(`*[_type == "techProject" && slug.
   startYear,
   endYear,
   description,
+  "categories": categories[]->{title, "slug": slug.current },
+  "techStack": techStack[]->{title, icon, "slug": slug.current }
+}`)
+
+export const PROJECT_TECH_STACK_SLUG_QUERY = defineQuery(`*[_type == "techProject" && $slug in techStack[]->slug.current && !(_id in path('drafts.**'))]| order(endYear desc){
+  _id, title, 'slug': slug.current, projectLink,
   "categories": categories[]->{title, "slug": slug.current },
   "techStack": techStack[]->{title, icon, "slug": slug.current }
 }`)
