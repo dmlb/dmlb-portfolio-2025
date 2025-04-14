@@ -1,7 +1,7 @@
 import PostCard from "@/components/Cards/PostCard/PostCard";
 import sanityClient from "@/lib/sanity-utils/sanityClient";
 import { CATEGORIES_SLUG_QUERY, POST_CATEGORY_QUERY } from "@/lib/sanity-utils/sanityQueries";
-import { POST_CATEGORY_QUERYResult, Slug } from "@/types/sanity";
+import { CATEGORIES_SLUG_QUERYResult, POST_CATEGORY_QUERYResult, Slug } from "@/types/sanity";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
@@ -18,7 +18,7 @@ export default async function CategoryPostsPage({
     params: Promise<{ slug: string }>
   }) {
     const slug = (await params).slug
-    const category = await sanityClient.fetch(CATEGORIES_SLUG_QUERY, { slug });
+    const category: CATEGORIES_SLUG_QUERYResult = await sanityClient.fetch(CATEGORIES_SLUG_QUERY, { slug });
     const posts: POST_CATEGORY_QUERYResult = await sanityClient.fetch(POST_CATEGORY_QUERY, { slug });
 
     if (!category) {

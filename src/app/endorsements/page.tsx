@@ -1,10 +1,11 @@
 import sanityClient from "@/lib/sanity-utils/sanityClient";
 import { ENDORSEMENT_QUERY } from "@/lib/sanity-utils/sanityQueries";
+import { ENDORSEMENT_QUERYResult } from "@/types/sanity";
 import styles from './endorsements.module.css';
 import Blockquote from "@/components/Blockquote/Blockquote";
 
 export default async function Endorsements() {
-    const endorsements = await sanityClient.fetch(ENDORSEMENT_QUERY);
+    const endorsements: ENDORSEMENT_QUERYResult = await sanityClient.fetch(ENDORSEMENT_QUERY);
 
     if (!endorsements) {
         return null;

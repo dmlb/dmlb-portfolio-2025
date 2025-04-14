@@ -1,12 +1,12 @@
 import { PortableText } from "@portabletext/react";
-import { OTHER_STUFF_QUERYResult } from "@/types/sanity";
+import { MORE_STUFF_QUERYResult } from "@/types/sanity";
 import SanityImage from "@/components/SanityImage/SanityImage";
 import SocialSVG from "@/components/SocialSVG/SocialSVG";
 
 import styles from './GenericProjectCard.module.css'
 
 type Props = {
-    project: OTHER_STUFF_QUERYResult[0]
+    project: MORE_STUFF_QUERYResult[0]
     cardVariantClasses?: string
 }
 
@@ -19,7 +19,7 @@ export default function GenericProjectCard({project, cardVariantClasses}: Props)
                     {logo && ( <SanityImage className={styles.cardFloatImg} src={logo} width={150} height={150} alt={logo.alt ?? ''} /> )}
                     {description && <PortableText value={description} />}
                 </div>
-                <div className="card__actions card__actions--wrap">
+                <div className={`card__actions card__actions--wrap ${styles.genericCardActions}`}>
                     {link && (
                         <a className="button" href={link}>
                             <SocialSVG iconSize={16} socialName="link" />

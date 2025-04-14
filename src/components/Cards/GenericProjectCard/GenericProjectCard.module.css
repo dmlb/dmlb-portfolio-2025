@@ -1,6 +1,12 @@
 .cardFloatImg {
     border-radius: var(--radi);
     margin-inline-end: var(--spacer-m);
+    margin-block-end: var(--spacer-m);
+    object-fit: contain;
+}
+
+.genericCardActions {
+    width: 100%;
 }
 
 @container main (min-width: 30ch) {

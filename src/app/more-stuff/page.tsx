@@ -1,13 +1,14 @@
 import sanityClient from "@/lib/sanity-utils/sanityClient";
-import { OTHER_STUFF_QUERY } from "@/lib/sanity-utils/sanityQueries";
+import { MORE_STUFF_QUERY } from "@/lib/sanity-utils/sanityQueries";
 
-import styles from './other-stuff.module.css'
+import styles from './more-stuff.module.css'
 
 
 import GenericProjectCard from "@/components/Cards/GenericProjectCard/GenericProjectCard";
+import { MORE_STUFF_QUERYResult } from "@/types/sanity";
 
-export default async function OtherStuff() {
-    const projects = await sanityClient.fetch(OTHER_STUFF_QUERY);
+export default async function MoreStuff() {
+    const projects: MORE_STUFF_QUERYResult = await sanityClient.fetch(MORE_STUFF_QUERY);
 
     if (!projects) {
         return null;

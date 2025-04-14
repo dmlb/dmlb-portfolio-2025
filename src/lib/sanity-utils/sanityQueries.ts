@@ -211,7 +211,7 @@ export const POST_TAG_QUERY = defineQuery(`*[_type == "post" && $slug in techSta
   }
 }`) 
 
-export const OTHER_STUFF_QUERY = defineQuery(`*[_type == "otherProject" && !(_id in path('drafts.**'))]{
+export const MORE_STUFF_QUERY = defineQuery(`*[_type == "otherProject" && !(_id in path('drafts.**'))]{
   _id,
   title,
   link,
@@ -230,7 +230,7 @@ export const OTHER_STUFF_QUERY = defineQuery(`*[_type == "otherProject" && !(_id
   }
 }`)
 
-export const LAST_OTHER_STUFF_QUERY = defineQuery(`*[_type == "otherProject" && !(_id in path('drafts.**'))]| order(endYear desc)[0]{
+export const LAST_MORE_STUFF_QUERY = defineQuery(`*[_type == "otherProject" && !(_id in path('drafts.**'))]| order(endYear desc)[0]{
   _id,
  title,
   link,

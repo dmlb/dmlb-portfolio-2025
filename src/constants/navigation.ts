@@ -5,5 +5,5 @@ export const MAIN_NAV: { name: string, path: string}[] = [
     { name: 'Endorsements', path: '/endorsements' },
     { name: 'Projects', path: '/projects' },
     { name: 'Posts', path: '/posts' },
-    { name: 'Other', path: '/other-stuff' },
+    { name: 'More', path: '/more-stuff' },
 ];

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import sanityClient from "@/lib/sanity-utils/sanityClient";
 import { POSTS_QUERY } from "@/lib/sanity-utils/sanityQueries";
 import PostCard from "@/components/Cards/PostCard/PostCard";
-import { Slug } from "@/types/sanity";
+import { POSTS_QUERYResult, Slug } from "@/types/sanity";
 
 export async function generateStaticParams() {
   const pages = await sanityClient.fetch(`*[_type == "post"]{slug}`)
@@ -14,7 +14,7 @@ export async function generateStaticParams() {
 }
 
 export default async function PostsHome() {
-  const posts = await sanityClient.fetch(POSTS_QUERY);
+  const posts: POSTS_QUERYResult = await sanityClient.fetch(POSTS_QUERY);
     if (!posts) {
       notFound()
     }

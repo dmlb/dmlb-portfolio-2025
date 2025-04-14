@@ -1,15 +1,16 @@
 import sanityClient from "@/lib/sanity-utils/sanityClient";
 import { EDUCATION_QUERY, FILM_CREDITS_QUERY, JOBS_QUERY, PROF_DEV_QUERY, TECH_WORK_QUERY } from "@/lib/sanity-utils/sanityQueries";
+import { EDUCATION_QUERYResult, FILM_CREDITS_QUERYResult, JOBS_QUERYResult, PROF_DEV_QUERYResult, TECH_WORK_QUERYResult } from "@/types/sanity";
 import styles from "./cv.module.css";
 import Accordion from "@/components/Accordion/Accordion"
 import TechStack from "@/components/TechStack/TechStack";
 
 export default async function CV() {
-    const techWork = await sanityClient.fetch(TECH_WORK_QUERY);
-    const profDevelopment = await sanityClient.fetch(PROF_DEV_QUERY);
-    const education = await sanityClient.fetch(EDUCATION_QUERY);
-    const otherWork = await sanityClient.fetch(JOBS_QUERY);
-    const filmCredits = await sanityClient.fetch(FILM_CREDITS_QUERY);
+    const techWork: TECH_WORK_QUERYResult = await sanityClient.fetch(TECH_WORK_QUERY);
+    const profDevelopment: PROF_DEV_QUERYResult = await sanityClient.fetch(PROF_DEV_QUERY);
+    const education: EDUCATION_QUERYResult = await sanityClient.fetch(EDUCATION_QUERY);
+    const otherWork: JOBS_QUERYResult = await sanityClient.fetch(JOBS_QUERY);
+    const filmCredits: FILM_CREDITS_QUERYResult = await sanityClient.fetch(FILM_CREDITS_QUERY);
 
     return (<>
         <Accordion isOpen={true} title="Development and Engineering Experience">
