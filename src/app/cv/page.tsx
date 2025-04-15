@@ -3,7 +3,7 @@ import { EDUCATION_QUERY, FILM_CREDITS_QUERY, JOBS_QUERY, PROF_DEV_QUERY, TECH_W
 import { EDUCATION_QUERYResult, FILM_CREDITS_QUERYResult, JOBS_QUERYResult, PROF_DEV_QUERYResult, TECH_WORK_QUERYResult } from "@/types/sanity";
 import styles from "./cv.module.css";
 import Accordion from "@/components/Accordion/Accordion"
-import TechStack from "@/components/TechStack/TechStack";
+import TechStackList from "@/components/Lists/TechStackList/TechStackList";
 
 export default async function CV() {
     const techWork: TECH_WORK_QUERYResult = await sanityClient.fetch(TECH_WORK_QUERY);
@@ -45,7 +45,7 @@ export default async function CV() {
 
                                 {techStack && (
                                     <div>
-                                        <TechStack techStack={techStack} iconSize={32} />
+                                        <TechStackList knowsAboutMeta={true} techStack={techStack} iconSize={32} />
                                     </div>
                                 )}
                             </div>
@@ -63,7 +63,7 @@ export default async function CV() {
                         <span itemProp="knowsAbout">{course}</span> ({year})
                         {techStack && (
                             <div className={styles.techStackInline}>
-                                <TechStack iconSize={20} techStack={techStack} /></div>
+                                <TechStackList knowsAboutMeta={true} iconSize={20} techStack={techStack} /></div>
                         )}
                     </li>
                 ))}

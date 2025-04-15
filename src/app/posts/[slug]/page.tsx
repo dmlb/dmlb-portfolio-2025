@@ -6,7 +6,7 @@ import { POST_SLUG_QUERY } from "@/lib/sanity-utils/sanityQueries";
 import { POST_SLUG_QUERYResult, Slug } from "@/types/sanity";
 import SanityImage from '@/components/SanityImage/SanityImage';
 import Date from "@/components/Date/Date";
-import PostCategoryList from "@/components/PostCategoryList/PostCategoryList";
+import PostCategoryList from "@/components/Lists/PostCategoryList/PostCategoryList";
 import AuthorCard from "@/components/Cards/AuthorCard/AuthorCard";
 
 export async function generateStaticParams() {

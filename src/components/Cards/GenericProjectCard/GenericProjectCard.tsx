@@ -6,7 +6,7 @@ import SocialSVG from "@/components/SocialSVG/SocialSVG";
 import styles from './GenericProjectCard.module.css'
 
 type Props = {
-    project: MORE_STUFF_QUERYResult[0]
+    project: Partial<MORE_STUFF_QUERYResult[0]>
     cardVariantClasses?: string
 }
 

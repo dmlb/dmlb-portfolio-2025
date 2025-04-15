@@ -5,7 +5,7 @@ import sanityClient from "@/lib/sanity-utils/sanityClient";
 import { PROJECT_SLUG_QUERYResult, Slug } from "@/types/sanity";
 import { PROJECT_SLUG_QUERY } from "@/lib/sanity-utils/sanityQueries";
 import AuthorCard from "@/components/Cards/AuthorCard/AuthorCard";
-import TechStack from "@/components/TechStack/TechStack";
+import TechStackList from "@/components/Lists/TechStackList/TechStackList";
 
 
 export async function generateStaticParams() {
@@ -41,7 +41,7 @@ export default async function ProjectPage({
           ))}
         </div>
         <strong>Tech Stack:</strong>{' '}
-        <TechStack techStack={project.techStack} iconSize={24} />
+        <TechStackList techStack={project.techStack} iconSize={24} />
       </header>
 
       <div>

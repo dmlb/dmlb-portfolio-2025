@@ -6,12 +6,10 @@ type Props = {
     icon: IconPicker | null;
     title: string;
     size: number;
-    // todo later tag pages
-    slug: string;
-    tagLink?: boolean;
+    knowsAboutMeta?: boolean;
 }
 
-export default function SkillIcon({ icon, title, size }: Props) {
+export default function SkillIcon({ icon, title, size, knowsAboutMeta }: Props) {
     if (!icon?.name) {
         return null;
     }
@@ -31,7 +29,7 @@ export default function SkillIcon({ icon, title, size }: Props) {
     
     return (
         <div data-testid="ncmp-skill-icon" className={styles.skillIcon} data-tooltip={title}>
-            <meta itemProp="knowsAbout" content={title} />
+            {knowsAboutMeta && <meta itemProp="knowsAbout" content={title} />}
             {iconSVG}
         </div>
     );

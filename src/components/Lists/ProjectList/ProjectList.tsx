@@ -1,5 +1,5 @@
 import { PROJECTS_QUERYResult } from "@/types/sanity";
-import TechProjectCard from "../Cards/TechProjectCard/TechProjectCard";
+import TechProjectCard from "../../Cards/TechProjectCard/TechProjectCard";
 
 type Props = {
     projects: PROJECTS_QUERYResult | null

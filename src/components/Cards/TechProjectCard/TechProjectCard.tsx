@@ -1,5 +1,5 @@
 import { PROJECTS_QUERYResult } from '@/types/sanity';
-import TechStack from '../../TechStack/TechStack';
+import TechStackList from '../../Lists/TechStackList/TechStackList';
 
 type Props = {
     project: PROJECTS_QUERYResult[0];
@@ -21,7 +21,7 @@ export default function TechProjectCard({ project, cardVariantClasses }: Props) 
             {/* {project.description && (
                 <p className="card__content">{project.description}</p>
             )} */}
-            <TechStack techStack={techStack} iconSize={24} />
+            <TechStackList techStack={techStack} iconSize={24} />
         </article>
     );
 }

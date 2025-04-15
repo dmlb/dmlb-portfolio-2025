@@ -4,6 +4,7 @@ import sanityClient from "@/lib/sanity-utils/sanityClient";
 import { POSTS_QUERY } from "@/lib/sanity-utils/sanityQueries";
 import PostCard from "@/components/Cards/PostCard/PostCard";
 import { POSTS_QUERYResult, Slug } from "@/types/sanity";
+import PostsList from "@/components/Lists/PostsList/PostsList";
 
 export async function generateStaticParams() {
   const pages = await sanityClient.fetch(`*[_type == "post"]{slug}`)
@@ -21,14 +22,8 @@ export default async function PostsHome() {
 
   return (
     <>
-      <h1>Posts</h1>
-      <ul className="list-unstyled card-grid">
-        {posts.map((post) => (
-          <li key={post._id}>
-            <PostCard post={post} cardVariantClasses="card--translucent card--bordered" />
-          </li>
-        ))}
-      </ul>
+      <h1>All Posts</h1>
+      <PostsList posts={posts} />
     </>
   );
 }

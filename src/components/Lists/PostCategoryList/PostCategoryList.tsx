@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import styles from './PostCategoryList.module.css'
+import styles from './PostCategoryList.module.css';
 
 type Props = {
     categories: {

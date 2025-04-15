@@ -14,7 +14,7 @@ export default async function MoreStuff() {
         return null;
     }
 
-    return (<ul key="custom" className={`list-unstyled ${styles.cardList}`}>
+    return (<ul className={`list-unstyled ${styles.cardList}`}>
 
         {/*style="--animation-order:2"*/}
         {projects.map((project) => (

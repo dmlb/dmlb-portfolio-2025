@@ -4,14 +4,16 @@ import TechProjectCard from "@/components/Cards/TechProjectCard/TechProjectCard"
 import DevLinks from "@/components/DevLinks/DevLinks";
 import sanityClient from "@/lib/sanity-utils/sanityClient";
 import { AUTHOR_INTRO_QUERY, LAST_MORE_STUFF_QUERY, LAST_POST_QUERY, LAST_PROJECT_QUERY } from "@/lib/sanity-utils/sanityQueries";
+import { AUTHOR_INTRO_QUERYResult, LAST_MORE_STUFF_QUERYResult, LAST_POST_QUERYResult, LAST_PROJECT_QUERYResult } from "@/types/sanity";
 import Link from "next/link";
 import styles from "./home.module.css";
 
+
 export default async function Home() {
-  const authorIntro = await sanityClient.fetch(AUTHOR_INTRO_QUERY);
-  const lastTechProject = await sanityClient.fetch(LAST_PROJECT_QUERY);
-  const lastGenericProject = await sanityClient.fetch(LAST_MORE_STUFF_QUERY);
-  const lastPost = await sanityClient.fetch(LAST_POST_QUERY);
+  const authorIntro: AUTHOR_INTRO_QUERYResult = await sanityClient.fetch(AUTHOR_INTRO_QUERY);
+  const lastTechProject: LAST_PROJECT_QUERYResult = await sanityClient.fetch(LAST_PROJECT_QUERY);
+  const lastGenericProject: LAST_MORE_STUFF_QUERYResult = await sanityClient.fetch(LAST_MORE_STUFF_QUERY);
+  const lastPost: LAST_POST_QUERYResult = await sanityClient.fetch(LAST_POST_QUERY);
 
   return (<>
     <div className={styles.cardWrapper}>

@@ -71,6 +71,18 @@ export const TECH_WORK_QUERY = defineQuery(`*[_type == "techWork" && !(_id in pa
     "techStack": techStack[]->{title, icon, "slug": slug.current },
 }`)
 
+export const TECH_WORK_TAG_QUERY = defineQuery(`*[_type == "techWork" && $slug in techStack[]->slug.current && !(_id in path('drafts.**'))]{
+  _id,
+  methodology,
+    startYear,
+    companyUrl,
+    company,
+    location,
+    endYear,
+    position,
+    "techStack": techStack[]->{title, icon, "slug": slug.current },
+}`) 
+
 export const PROF_DEV_QUERY = defineQuery(`*[_type == "professionalDevelopment" && !(_id in path('drafts.**'))] |order(year desc) {
   course,
     year,
@@ -134,6 +146,8 @@ export const TAGS_SLUG_QUERY = defineQuery(`*[_type == "techStack" && slug.curre
   _id, title
 }`)
 
+export const ALL_CONTENT_BY_TAG_QUERY = defineQuery(`*[count((techStack[]->slug.current)[@ in [$slug]]) > 0]`)
+
 export const PROJECTS_QUERY = defineQuery(`*[_type == "techProject" && defined(slug.current) && !(_id in path('drafts.**'))]| order(endYear desc){
   _id, title, 'slug': slug.current, projectLink,
   "categories": categories[]->{title, "slug": slug.current },
@@ -158,7 +172,7 @@ export const PROJECT_SLUG_QUERY = defineQuery(`*[_type == "techProject" && slug.
   "techStack": techStack[]->{title, icon, "slug": slug.current }
 }`)
 
-export const PROJECT_TECH_STACK_SLUG_QUERY = defineQuery(`*[_type == "techProject" && $slug in techStack[]->slug.current && !(_id in path('drafts.**'))]| order(endYear desc){
+export const PROJECT_TAG_SLUG_QUERY = defineQuery(`*[_type == "techProject" && $slug in techStack[]->slug.current && !(_id in path('drafts.**'))]| order(endYear desc){
   _id, title, 'slug': slug.current, projectLink,
   "categories": categories[]->{title, "slug": slug.current },
   "techStack": techStack[]->{title, icon, "slug": slug.current }
@@ -175,6 +189,13 @@ export const LAST_POST_QUERY = defineQuery(`*[_type == "post" && defined(slug.cu
   "categories": categories[]->{title, "slug": slug.current },
   "techStack": techStack[]->{title, icon, "slug": slug.current }
 }`)
+
+export const LAST_3_POSTS_QUERY = defineQuery(`*[_type == "post" && defined(slug.current) && !(_id in path('drafts.**'))]| order(_createdAt desc)[0..2]{
+  _id, title, 'slug': slug.current,
+  "categories": categories[]->{title, "slug": slug.current },
+  "techStack": techStack[]->{title, icon, "slug": slug.current }
+}`)
+
 export const POST_SLUG_QUERY = defineQuery(`*[_type == "post" && slug.current == $slug && !(_id in path('drafts.**'))][0]{
     title,
     mainImage {

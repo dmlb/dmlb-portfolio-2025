@@ -1,0 +1,15 @@
+.techStackList {
+    margin: var(--spacer) 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacer);
+}
+
+.techStackListLink {
+    border-bottom: unset !important;
+
+    &:hover,
+    &:focus-visible {
+        --skill-icon-fill: var(--clr-accent);
+    }
+}
