@@ -63,7 +63,7 @@ export default async function About() {
                         return (
                             <li key={skill._id}>
 								{/* TODO */}
-								<Link href={`/projects/tech-stack/${skill.slug}`} className={styles.skillLink}>
+								<Link href={`/projects?q=${skill.title}`} className={styles.skillLink}>
                                 	<SkillIcon {...skill} size={48}  />
 								</Link>
                             </li>

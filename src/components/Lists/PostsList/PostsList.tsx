@@ -5,7 +5,7 @@ type Props = {
     posts: POSTS_QUERYResult | null;
 };
 
-export default function PostsLists({posts}: Props) {
+export default function PostsList({posts}: Props) {
     if (!posts || posts.length < 1) return null;
     return (
         <ul data-testid="ncmp-posts-list" className="list-unstyled card-grid">
