@@ -55,6 +55,12 @@ export default defineType({
       type: 'datetime',
     }),
     defineField({
+      name: 'excerpt',
+      title: 'Excerpt',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'body',
       title: 'Body',
       type: 'blockContent',

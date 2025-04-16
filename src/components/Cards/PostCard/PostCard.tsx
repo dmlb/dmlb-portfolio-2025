@@ -7,7 +7,7 @@ type Props = {
 }
 
 export default function PostCard({ post, cardVariantClasses }: Props) {
-    const {title, slug, categories} = post;
+    const {title, slug, categories, excerpt} = post;
     const [mainCategory] = categories;
     return (
         <article aria-label={title} data-testid="ncmp-post-card" className={`card ${cardVariantClasses}`}>
@@ -16,6 +16,7 @@ export default function PostCard({ post, cardVariantClasses }: Props) {
                 <span>{mainCategory?.title}</span>
             </div>
             <h3 className="card__header">{title}</h3>
+            {excerpt && (<p className="card__content">{excerpt}</p>)}
             </Link>
         </article>
     );
