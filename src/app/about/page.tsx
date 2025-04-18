@@ -62,9 +62,8 @@ export default async function About() {
                     {skills.map((skill) => {
                         return (
                             <li key={skill._id}>
-								{/* TODO */}
 								<Link href={`/projects?q=${skill.title}`} className={styles.skillLink}>
-                                	<SkillIcon {...skill} size={48}  />
+                                	<SkillIcon knowsAboutMeta {...skill} size={48}  />
 								</Link>
                             </li>
                         );

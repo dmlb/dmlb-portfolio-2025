@@ -6,7 +6,7 @@ import PostsList from "@/components/Lists/PostsList/PostsList";
 export default async function LatestPosts() {
     const posts: LAST_3_POSTS_QUERYResult = await sanityClient.fetch(LAST_3_POSTS_QUERY);
 
-    if (!posts) {
+    if (!posts || posts.length < 3) {
         return null;
     }
 

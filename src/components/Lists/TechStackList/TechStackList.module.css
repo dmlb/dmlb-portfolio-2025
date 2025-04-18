@@ -5,6 +5,11 @@
     gap: var(--spacer);
 }
 
+.techStackListText {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
 .techStackListLink {
     border-bottom: unset !important;
 
@@ -12,4 +17,11 @@
     &:focus-visible {
         --skill-icon-fill: var(--clr-accent);
     }
+}
+
+.techStackListItemText {
+    display: flex;
+    align-items: center;
+    gap: var(--spacer);
+    padding: var(--spacer);
 }

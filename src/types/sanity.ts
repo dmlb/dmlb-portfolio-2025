@@ -315,6 +315,7 @@ export type Post = {
     [internalGroqTypeReferenceTo]?: "techStack";
   }>;
   publishedAt?: string;
+  excerpt: string;
   body?: BlockContent;
 };
 
@@ -703,6 +704,7 @@ export type ALL_CONTENT_BY_TAG_QUERYResult = Array<{
     [internalGroqTypeReferenceTo]?: "techStack";
   }>;
   publishedAt?: string;
+  excerpt: string;
   body?: BlockContent;
 } | {
   _id: string;
@@ -843,7 +845,7 @@ export type POSTS_QUERYResult = Array<{
   _id: string;
   title: string;
   slug: string;
-  excerpt: null;
+  excerpt: string;
   categories: Array<{
     title: string;
     slug: string;
@@ -860,7 +862,7 @@ export type LAST_POST_QUERYResult = {
   _id: string;
   title: string;
   slug: string;
-  excerpt: null;
+  excerpt: string;
   categories: Array<{
     title: string;
     slug: string;
@@ -877,7 +879,7 @@ export type LAST_3_POSTS_QUERYResult = Array<{
   _id: string;
   title: string;
   slug: string;
-  excerpt: null;
+  excerpt: string;
   categories: Array<{
     title: string;
     slug: string;
@@ -916,10 +918,11 @@ export type POST_SLUG_QUERYResult = {
   }> | null;
 } | null;
 // Variable: POST_CATEGORY_QUERY
-// Query: *[_type == "post" && $slug in categories[]->slug.current && !(_id in path('drafts.**'))]{  _id,  title,  'slug': slug.current,  "categories": categories[]->{title, "slug": slug.current },  "techStack": techStack[]->{title, icon, "slug": slug.current },  "author": {      "name": author->name,  }}
+// Query: *[_type == "post" && $slug in categories[]->slug.current && !(_id in path('drafts.**'))]{  _id,  title,  excerpt,  'slug': slug.current,  "categories": categories[]->{title, "slug": slug.current },  "techStack": techStack[]->{title, icon, "slug": slug.current },  "author": {      "name": author->name,  }}
 export type POST_CATEGORY_QUERYResult = Array<{
   _id: string;
   title: string;
+  excerpt: string;
   slug: string;
   categories: Array<{
     title: string;
@@ -934,12 +937,12 @@ export type POST_CATEGORY_QUERYResult = Array<{
     name: string;
   };
 }>;
-// Variable: POST_TAG_QUERY
+// Variable: POST_TAG_SLUG_QUERY
 // Query: *[_type == "post" && $slug in techStack[]->slug.current && !(_id in path('drafts.**'))]{  _id,  title,  excerpt,  'slug': slug.current,  "categories": categories[]->{title, "slug": slug.current },  "techStack": techStack[]->{title, icon, "slug": slug.current },  "author": {      "name": author->name  }}
-export type POST_TAG_QUERYResult = Array<{
+export type POST_TAG_SLUG_QUERYResult = Array<{
   _id: string;
   title: string;
-  excerpt: null;
+  excerpt: string;
   slug: string;
   categories: Array<{
     title: string;
@@ -1032,8 +1035,8 @@ declare module "@sanity/client" {
     "*[_type == \"post\" && defined(slug.current) && !(_id in path('drafts.**'))]| order(_createdAt desc) [0]{\n  _id, title, 'slug': slug.current,\n  excerpt,\n  \"categories\": categories[]->{title, \"slug\": slug.current },\n  \"techStack\": techStack[]->{title, icon, \"slug\": slug.current }\n}": LAST_POST_QUERYResult;
     "*[_type == \"post\" && defined(slug.current) && !(_id in path('drafts.**'))]| order(_createdAt desc)[0..2]{\n  _id, title, 'slug': slug.current,\n  excerpt,\n  \"categories\": categories[]->{title, \"slug\": slug.current },\n  \"techStack\": techStack[]->{title, icon, \"slug\": slug.current }\n}": LAST_3_POSTS_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug && !(_id in path('drafts.**'))][0]{\n    title,\n    mainImage {\n      _type,\n      asset,\n      \"alt\": asset->altText,\n    },\n    _createdAt,\n    _updatedAt,\n    body,\n    \"categories\": categories[]->{title, \"slug\": slug.current },\n   \"techStack\": techStack[]->{title, icon, \"slug\": slug.current }\n  }": POST_SLUG_QUERYResult;
-    "*[_type == \"post\" && $slug in categories[]->slug.current && !(_id in path('drafts.**'))]{\n  _id,\n  title,\n  'slug': slug.current,\n  \"categories\": categories[]->{title, \"slug\": slug.current },\n  \"techStack\": techStack[]->{title, icon, \"slug\": slug.current },\n  \"author\": {\n      \"name\": author->name,\n  }\n}": POST_CATEGORY_QUERYResult;
-    "*[_type == \"post\" && $slug in techStack[]->slug.current && !(_id in path('drafts.**'))]{\n  _id,\n  title,\n  excerpt,\n  'slug': slug.current,\n  \"categories\": categories[]->{title, \"slug\": slug.current },\n  \"techStack\": techStack[]->{title, icon, \"slug\": slug.current },\n  \"author\": {\n      \"name\": author->name\n  }\n}": POST_TAG_QUERYResult;
+    "*[_type == \"post\" && $slug in categories[]->slug.current && !(_id in path('drafts.**'))]{\n  _id,\n  title,\n  excerpt,\n  'slug': slug.current,\n  \"categories\": categories[]->{title, \"slug\": slug.current },\n  \"techStack\": techStack[]->{title, icon, \"slug\": slug.current },\n  \"author\": {\n      \"name\": author->name,\n  }\n}": POST_CATEGORY_QUERYResult;
+    "*[_type == \"post\" && $slug in techStack[]->slug.current && !(_id in path('drafts.**'))]{\n  _id,\n  title,\n  excerpt,\n  'slug': slug.current,\n  \"categories\": categories[]->{title, \"slug\": slug.current },\n  \"techStack\": techStack[]->{title, icon, \"slug\": slug.current },\n  \"author\": {\n      \"name\": author->name\n  }\n}": POST_TAG_SLUG_QUERYResult;
     "*[_type == \"otherProject\" && !(_id in path('drafts.**'))]{\n  _id,\n  title,\n  link,\n  description,\n  startYear,\n  endYear,\n  logo {\n    _type,\n    asset,\n    \"alt\": asset->altText,\n  },\n  \"socials\": {\n      linkedin,\n      discord,\n      instagram\n  }\n}": MORE_STUFF_QUERYResult;
     "*[_type == \"otherProject\" && !(_id in path('drafts.**'))]| order(endYear desc)[0]{\n  _id,\n title,\n  link,\n  description,\n  logo {\n    _type,\n    asset,\n    \"alt\": asset->altText,\n  },\n  \"socials\": {\n      linkedin,\n      discord,\n      instagram\n  }\n}": LAST_MORE_STUFF_QUERYResult;
   }

@@ -217,6 +217,7 @@ export const POST_SLUG_QUERY = defineQuery(`*[_type == "post" && slug.current ==
 export const POST_CATEGORY_QUERY = defineQuery(`*[_type == "post" && $slug in categories[]->slug.current && !(_id in path('drafts.**'))]{
   _id,
   title,
+  excerpt,
   'slug': slug.current,
   "categories": categories[]->{title, "slug": slug.current },
   "techStack": techStack[]->{title, icon, "slug": slug.current },
@@ -224,7 +225,7 @@ export const POST_CATEGORY_QUERY = defineQuery(`*[_type == "post" && $slug in ca
       "name": author->name,
   }
 }`)
-export const POST_TAG_QUERY = defineQuery(`*[_type == "post" && $slug in techStack[]->slug.current && !(_id in path('drafts.**'))]{
+export const POST_TAG_SLUG_QUERY = defineQuery(`*[_type == "post" && $slug in techStack[]->slug.current && !(_id in path('drafts.**'))]{
   _id,
   title,
   excerpt,

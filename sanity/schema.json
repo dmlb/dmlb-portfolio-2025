@@ -1837,6 +1837,13 @@
         },
         "optional": true
       },
+      "excerpt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": false
+      },
       "body": {
         "type": "objectAttribute",
         "value": {

@@ -2,8 +2,8 @@ import { PortableText } from "@portabletext/react";
 import { notFound } from "next/navigation";
 
 import sanityClient from "@/lib/sanity-utils/sanityClient";
-import { POST_SLUG_QUERY } from "@/lib/sanity-utils/sanityQueries";
-import { POST_SLUG_QUERYResult, Slug } from "@/types/sanity";
+import { AUTHOR_CARD_QUERY, POST_SLUG_QUERY } from "@/lib/sanity-utils/sanityQueries";
+import { AUTHOR_CARD_QUERYResult, POST_SLUG_QUERYResult, Slug } from "@/types/sanity";
 import SanityImage from '@/components/SanityImage/SanityImage';
 import Date from "@/components/Date/Date";
 import PostCategoryList from "@/components/Lists/PostCategoryList/PostCategoryList";
@@ -24,6 +24,9 @@ export default async function PostPage({
 }) {
   const slug = (await params).slug
   const post: POST_SLUG_QUERYResult = await sanityClient.fetch(POST_SLUG_QUERY, { slug });
+  // one author exists currently
+  const author: AUTHOR_CARD_QUERYResult = await sanityClient.fetch(AUTHOR_CARD_QUERY);
+
 
   if (!post) {
     notFound()
@@ -51,7 +54,7 @@ export default async function PostPage({
       </div> 
 
       <footer>
-        <AuthorCard />
+        <AuthorCard author={author} />
       </footer>
     </article>
   )

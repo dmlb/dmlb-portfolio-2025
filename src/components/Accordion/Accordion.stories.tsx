@@ -42,6 +42,12 @@ export const OpenStartAccordion: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
+
+    const summary = canvas.getByText('Accordion Title');
+    const content = canvas.getByText('Accordion Content');
+    expect(content).toBeVisible();
+    summary.click();
+    expect(content).not.toBeVisible();
   }
 };
 
