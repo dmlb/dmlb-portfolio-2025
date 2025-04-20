@@ -1,0 +1,15 @@
+.postsSupplementGroup {
+    margin-inline: auto;
+    margin-block-start: var(--spacer-l);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacer-l);
+
+    &::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: calc(var(--spacer-s)/2);
+        background-color: var(--clr-accent);
+    }
+}

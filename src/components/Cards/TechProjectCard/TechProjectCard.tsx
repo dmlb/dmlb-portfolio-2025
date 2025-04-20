@@ -18,9 +18,6 @@ export default function TechProjectCard({ project, cardVariantClasses }: Props) 
                 <span>{mainCategory?.title}</span>
             </div>
             <h3 className="card__header">{title}</h3>
-            {/* {project.description && (
-                <p className="card__content">{project.description}</p>
-            )} */}
             <TechStackList techStack={techStack} iconSize={24} />
         </article>
     );

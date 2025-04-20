@@ -1,8 +1,13 @@
-.experienceList p {
-    line-height: 1;
-    margin: var(--spacer) 0;
+.experienceList {
+    > li {
+        margin-block-end: var(--spacer-l);
+    }
+    
+    p {
+        line-height: 1;
+        margin-block: var(--spacer);
+    }
 }
-
 .experienceListDetails {
     margin: unset;
     padding: unset;
@@ -11,6 +16,8 @@
 .experienceListHeading {
     font-size: var(--size-h3);
     font-weight: var(--weight-bold);
+    margin-block-start: 0;
+    margin-block-end: var(--spacer-s);
 }
 
 .experienceListPosition {
@@ -25,6 +32,10 @@
 
 .techStackInline {
     display: inline-flex;
+}
+
+.experienceListColumns > li{
+    margin-block-end: var(--spacer);
 }
 
 @container (min-width: 65ch) {

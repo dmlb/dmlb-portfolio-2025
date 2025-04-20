@@ -63,7 +63,7 @@ export default async function About() {
                         return (
                             <li key={skill._id}>
 								<Link href={`/projects?q=${skill.title}`} className={styles.skillLink}>
-                                	<SkillIcon knowsAboutMeta {...skill} size={48}  />
+                                	<SkillIcon iconOnly knowsAboutMeta {...skill} size={48}  />
 								</Link>
                             </li>
                         );

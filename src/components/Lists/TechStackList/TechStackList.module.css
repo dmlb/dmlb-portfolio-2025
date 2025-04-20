@@ -1,5 +1,5 @@
 .techStackList {
-    margin: var(--spacer) 0;
+    margin-block: var(--spacer);
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacer);

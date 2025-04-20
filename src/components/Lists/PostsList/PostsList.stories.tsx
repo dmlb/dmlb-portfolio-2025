@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import PostCard from './PostCard';
+import PostsList from './PostsList';
 import { mockPosts } from '../../../../tests/___mocks___/post.mock';
 
 const meta = {
-  title: 'Post Card',
-  component: PostCard,
+  title: 'Posts List',
+  component: PostsList,
   args: {
-    post: mockPosts[0]
+    posts: mockPosts
   }
-} satisfies Meta<typeof PostCard>;
+} satisfies Meta<typeof PostsList>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const GlobalPostCard: Story = {};
+export const GlobalPostsList: Story = {};
 

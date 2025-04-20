@@ -19,7 +19,7 @@
 
     & cite {
         display: block;
-        margin: var(--spacer) 0;
+        margin-block: var(--spacer);
     }
 }
 

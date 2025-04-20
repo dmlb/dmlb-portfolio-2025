@@ -10,12 +10,12 @@
 
 .sidebarInner {
     padding: var(--spacer-m);
-    container-type: inline-size;
-    container-name: sidebar;
+    --card-width: 30ch;
 }
 
 .quickList {
-    font-size: var(--size-body);
+    container-type: inline-size;
+    container-name: sidebar;
 
     & dt {
         display: block;
@@ -45,7 +45,7 @@
     }
 }
 
-@container main (min-width: 960px) {
+@container main (min-width: 860px) {
     .wrapper {
         display: grid;
         grid-template-columns: 1fr 360px;

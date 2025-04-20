@@ -1,0 +1,14 @@
+.authorCard {
+    margin-block: var(--spacer-l);
+}
+
+.authorCardTitle {
+    font-size: var(--size-h6);
+    line-height: 1.5;
+}
+
+.cardFloatImg {
+    float: left;
+    margin-inline: var(--spacer-s);
+    margin-block: var(--spacer);
+}

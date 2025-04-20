@@ -1,22 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import AuthorCard from './AuthorCard';
+import { mockAuthor } from '../../../../tests/___mocks___/author.mock';
 
 const meta = {
   title: 'Author Card',
   component: AuthorCard,
   args: {
-    author: {
-      name: "Author Name",
-      pronouns: "they / them",
-      title: "Author Title",
-      shortBio: "Author short bio",
-      image: {
-        _type: "image",
-        asset: null,
-        alt: "Author Image",
-      },
-    }
+    author: mockAuthor,
   }
 } satisfies Meta<typeof AuthorCard>;
 

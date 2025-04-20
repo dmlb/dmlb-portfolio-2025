@@ -9,6 +9,8 @@ import Date from "@/components/Date/Date";
 import PostCategoryList from "@/components/Lists/PostCategoryList/PostCategoryList";
 import AuthorCard from "@/components/Cards/AuthorCard/AuthorCard";
 
+import styles from './post.module.css';
+
 export async function generateStaticParams() {
   const pages = await sanityClient.fetch(`*[_type == "posts"]{slug}`)
 
@@ -33,22 +35,22 @@ export default async function PostPage({
   }
 
   return (
-    <article>
+    <article className={styles.postContent}>
       <header>
-        <h1>{post.title}</h1>
-        <p>
+        <h1 className={styles.postTitle}>{post.title}</h1>
+        <p className={styles.postMetaDates}>
           <strong>Created</strong> <Date dateString={post._createdAt} />  • <strong>Updated</strong> <Date dateString={post._updatedAt} />
         </p>
-        <div>
-          <strong>Categorized under</strong>
+        <div className={styles.postMetaCategories}>
+          <strong>Categorized under{' '}</strong>
           <PostCategoryList categories={post.categories}></PostCategoryList>
         </div>
         
 
-        {post.mainImage && <SanityImage width={600} height={400} src={post.mainImage} alt={post.mainImage?.alt ?? post.title} />}
+        {post.mainImage && <SanityImage className={styles.postImage} width={600} height={400} src={post.mainImage} alt={post.mainImage?.alt ?? post.title} />}
       </header>
 
-      <div>
+      <div className={`portable-text-elements`}>
         {post.body && <PortableText
           value={post.body} />}
       </div> 

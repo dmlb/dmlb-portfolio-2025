@@ -1,0 +1,29 @@
+.postContent {
+    max-width: 100%;
+    width: clamp(var(--container-s), 45ch, var(--container-m));
+    margin-inline: auto;
+}
+
+.postTitle {
+    font-size: var(--size-h1);
+    line-height: 1.2;
+    color: var(--clr-secondary);
+}
+
+.postMetaDates {
+    font-size: var(--size-small);
+    margin-block-end: var(--spacer-m);
+    color: var(--clr-gray);
+}
+
+.postMetaCategories {
+    display: flex;
+    gap: var(--spacer);
+    flex-wrap: wrap;
+    margin-block: var(--spacer) var(--spacer-l);
+}
+
+.postImage {
+    margin-inline: auto;
+    filter: opacity(.8);
+}

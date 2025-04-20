@@ -1,3 +1,5 @@
+import styles from './posts.module.css'
+
 export default async function PostsLayout({
     children,
     categories,
@@ -12,11 +14,13 @@ export default async function PostsLayout({
 
     return (<>
         <div>
-        {children}
+          {children}
         </div>
-        {latestPosts}
-        {categories}
-        {tags}
+        <aside className={styles.postsSupplementGroup}>
+          {latestPosts}
+          {categories}
+          {tags}
+        </aside>
         </>
     )
   }

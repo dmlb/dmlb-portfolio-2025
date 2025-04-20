@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useCallback, useState } from "react";
+import { useCallback, useState, useMemo, useEffect } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
 import Accordion from "@/components/Accordion/Accordion";
@@ -17,6 +17,7 @@ type Props = {
     projectTypeList: PROJECT_TYPE_QUERYResult | null;
 };
 
+
 export default function ProjectFilter({ projects, projectTypeList }: Props) {
     const router = useRouter();
     const pathname = usePathname();
@@ -26,72 +27,56 @@ export default function ProjectFilter({ projects, projectTypeList }: Props) {
     const searchQuery = searchParams.get('q');
 
     // set initial state
-    const [filteredProjects, setFilteredProjects] = useState<PROJECTS_QUERYResult | null>(projects);
     const [projectSearch, setProjectSearch] = useState<string | null>(searchQuery);
     const [selectedProjectType, setSelectedProjectType] = useState<string | null>(projectType);
 
-
-    const updateUrlParams = useCallback(() => {
+    useEffect(() => {
         // update the URL with the search query and selected project type
         const params = new URLSearchParams();
-        if (projectSearch) {
-            params.set('q', projectSearch);
-        }
-        if (selectedProjectType) {
-            params.set('type', selectedProjectType);
-        }
+        if (projectSearch) params.set('q', projectSearch);
+        if (selectedProjectType) params.set('type', selectedProjectType);
         const paramsString = params.toString();
 
-        if (paramsString === searchParams.toString()) {
-            return;
-        }
+        if (paramsString === searchParams.toString()) return;
+
         if (paramsString) {
             router.push(`${pathname}?${paramsString}`);
         } else {
             router.push(pathname);
         }
-    }, [projectSearch, selectedProjectType, pathname, router, searchParams]);
+    }, [projectSearch, selectedProjectType, projects]);
 
-    const handleProjectFiltering = useCallback(() => {
-        // filter the projects based on the search query and selected project type
-        const newFilteredProjects = projects?.filter((project) => {
+    const filteredProjects = useMemo(() => {
+        return projects?.filter((project) => {
             const searchMatch = project.title.toLowerCase().includes(projectSearch?.toLowerCase() || '') || project.techStack.some((tech) => tech.title.toLowerCase().includes(projectSearch?.toLowerCase() || ''));
 
             const typeMatch = selectedProjectType ? project.categories.some((type) => type.slug === selectedProjectType) : true;
 
             return searchMatch && typeMatch;
-        });
-        setFilteredProjects(newFilteredProjects ?? null)
-    }, [projectSearch, selectedProjectType, setFilteredProjects, projects]);
-
-    useEffect(() => {
-        handleProjectFiltering();
-        updateUrlParams();
+        }) ?? null;
     }, [projectSearch, selectedProjectType, projects]);
 
     return (<>
-
         <form data-testid="ncmp-project-filter-form" className={styles.projectsForm} aria-label="Filter Projects">
             <Accordion isOpen={true} title="Filter Projects">
-
-                <SearchField fieldInfo={
-                    {
+                <SearchField
+                    fieldInfo={{
                         label: "Search Projects",
                         name: "project-search",
                         id: "project-search"
-                    }
-                }
+                    }}
                     searchValue={projectSearch}
-                    setSearchValue={setProjectSearch} />
-                <ProjectTypeRadioFieldset fieldInfo={
-                    {
+                    setSearchValue={setProjectSearch}
+                />
+                <ProjectTypeRadioFieldset
+                    fieldInfo={{
                         legend: "Filter by Project Type",
                         name: "type-filter"
-                    }
-                }
+                    }}
                     projectTypeList={projectTypeList}
                     selectedValue={selectedProjectType}
-                    setSelectedValue={setSelectedProjectType} />
+                    setSelectedValue={setSelectedProjectType}
+                />
             </Accordion>
 
             <span data-testid="ncmp-project-filter-form-status" className={styles.formStatus} role="status">
@@ -101,7 +86,6 @@ export default function ProjectFilter({ projects, projectTypeList }: Props) {
                 {projectSearch && selectedProjectType && (<>and{' '}</>)}
                 {selectedProjectType && (<>project type <output className={styles.capitalize}>{selectedProjectType.replaceAll('-', ' ')}</output></>)}
             </span>
-
         </form>
 
         <ProjectList projects={filteredProjects}></ProjectList>
