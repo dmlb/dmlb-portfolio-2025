@@ -26,7 +26,7 @@ export default function SearchField({ fieldInfo, searchValue, setSearchValue }: 
                 value={searchValue ?? ''}
                 onChange={(e) => setSearchValue(e.target.value)}
             />
-            <button className={styles.formReset} type="button" onClick={() => setSearchValue(null)}>
+            <button data-testid="ncmp-search-field-reset" className={styles.formReset} type="button" onClick={() => setSearchValue(null)}>
                 <span aria-hidden="true">✖</span>
                 <span className="sr-only">clear search</span>
             </button>
