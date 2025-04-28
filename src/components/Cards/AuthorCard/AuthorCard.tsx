@@ -9,7 +9,7 @@ type Props = {
     author: AUTHOR_CARD_QUERYResult
 }
 
-export default async function AuthorCard({ author }: Props) {
+export default function AuthorCard({ author }: Props) {
     if (!author) {
         return null;
     }

@@ -7,7 +7,8 @@ const meta = {
   title: 'Generic Project Card',
   component: GenericProjectCard,
   args: {
-    project: mockMoreStuffProjects[0]
+    project: mockMoreStuffProjects[0],
+    cardVariantClasses: 'card--translucent card--bordered'
   }
 } satisfies Meta<typeof GenericProjectCard>;
 

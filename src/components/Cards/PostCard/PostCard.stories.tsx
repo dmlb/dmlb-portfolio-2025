@@ -7,7 +7,8 @@ const meta = {
   title: 'Post Card',
   component: PostCard,
   args: {
-    post: mockPosts[0]
+    post: mockPosts[0],
+    cardVariantClasses: 'card--translucent card--bordered'
   }
 } satisfies Meta<typeof PostCard>;
 

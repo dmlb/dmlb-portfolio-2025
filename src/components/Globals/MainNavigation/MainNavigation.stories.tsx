@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { userEvent, within } from '@storybook/test';
+import { within, expect } from '@storybook/test';
 
 import MainNavigation from './MainNavigation';
-
+import { MAIN_NAV } from '@/constants/navigation';
 
 const meta = {
   title: 'Main Navigation',
@@ -16,9 +16,12 @@ export const GlobalMainNavigation: Story = {
     play: async ({ canvasElement }) => {
         const canvas = within(canvasElement)
 
-        const navLinks = canvas.getAllByRole('link');
-        navLinks.forEach(async (link) => {
-            await userEvent.click(link);
+        MAIN_NAV.forEach((navItem) => {
+            const navLink = canvas.getByRole('link', {
+                name: navItem.name
+            });
+            expect(navLink).toBeInTheDocument();
+            expect(navLink).toHaveAttribute('href', navItem.path);
         })
     }
 };
