@@ -22,5 +22,5 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const GlobalProjectTypeRadioFieldset: Story = {};
+export const ProjectTypeRadioFieldsetStory: Story = {};
 

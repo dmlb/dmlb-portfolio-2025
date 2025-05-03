@@ -15,5 +15,5 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const GlobalPostCard: Story = {};
+export const PostCardStory: Story = {};
 

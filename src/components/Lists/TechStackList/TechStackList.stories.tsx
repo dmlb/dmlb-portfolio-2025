@@ -11,11 +11,14 @@ const meta = {
     iconSize: 24,
     knowsAboutMeta: false,
     techStack: mockTechStack
+  },
+  parameters: {
+    actions: { disable: true }
   }
 } satisfies Meta<typeof TechStackList>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const GlobalTechStackList: Story = {};
+export const TechStackListStory: Story = {};
 

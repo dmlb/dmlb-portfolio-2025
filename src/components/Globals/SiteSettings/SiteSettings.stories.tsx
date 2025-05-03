@@ -11,7 +11,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const GlobalSiteSettings: Story = {
+export const SiteSettingsStory: Story = {
     play: async ({ canvasElement }) => {
         const canvas = within(canvasElement)
 

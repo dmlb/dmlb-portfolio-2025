@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { within, expect, userEvent } from '@storybook/test';
-
 import Accordion from './Accordion';
 
 const meta = {
@@ -9,13 +8,13 @@ const meta = {
   args: {
     title: 'Accordion Title',
     children: 'Accordion Content',
-  }
+  },
 } satisfies Meta<typeof Accordion>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const ClosedStartAccordion: Story = {
+export const ClosedAccordion: Story = {
   args: {
     isOpen: false
   },
@@ -36,7 +35,7 @@ export const ClosedStartAccordion: Story = {
 };
 
 
-export const OpenStartAccordion: Story = {
+export const OpenAccordion: Story = {
   args: {
     isOpen: true,
   },
@@ -48,6 +47,7 @@ export const OpenStartAccordion: Story = {
     expect(content).toBeVisible();
     summary.click();
     expect(content).not.toBeVisible();
+    await userEvent.type(summary, '{space}')
   }
 };
 

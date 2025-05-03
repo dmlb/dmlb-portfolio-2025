@@ -15,5 +15,5 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const GlobalGenericProjectCard: Story = {};
+export const GenericProjectCardStory: Story = {};
 

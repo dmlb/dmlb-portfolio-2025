@@ -8,8 +8,8 @@ const meta = {
   component: Header,
   args: {
     author: {
-        name: 'Danielle',
-        title: 'Software Engineer',
+      name: 'Danielle',
+      title: 'Software Engineer',
     }
   },
 } satisfies Meta<typeof Header>;
@@ -17,18 +17,18 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const GlobalHeader: Story = {
-    play: async ({ canvasElement, args }) => {
-        const canvas = within(canvasElement)
-        
-        const logo = canvas.getByAltText('curly braces inside a lens');
-        expect(logo).toBeInTheDocument();
+export const HeaderStory: Story = {
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement)
 
-        const name = canvas.getByText(`${args?.author?.name}`);
-        expect(name).toBeInTheDocument();
+    const logo = canvas.getByAltText('curly braces inside a lens');
+    expect(logo).toBeInTheDocument();
 
-        const title = canvas.getByText(`${args?.author?.title}`);
-        expect(title).toBeInTheDocument();
-    }
+    const name = canvas.getByText(`${args?.author?.name}`);
+    expect(name).toBeInTheDocument();
+
+    const title = canvas.getByText(`${args?.author?.title}`);
+    expect(title).toBeInTheDocument();
+  }
 };
 

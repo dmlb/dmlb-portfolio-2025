@@ -1,16 +1,23 @@
 import type { Preview } from "@storybook/react";
+import { withActions } from '@storybook/addon-actions/decorator';
 
 import '../src/app/globals.css'
 
 const preview: Preview = {
   decorators: [
+    withActions,
     (Story, context) => {
       document.documentElement.setAttribute('data-mode', context.globals.theme);
       document.documentElement.setAttribute('data-font', context.globals.font);
       document.documentElement.setAttribute('data-motion', context.globals.animation);
       return Story();
-    }],
+    },
+  ],
   parameters: {
+    actions: { 
+      argTypesRegex: '^on.*',
+      handles: ['keydown', 'click', 'focus', 'blur', 'change', 'input'],
+    },
     backgrounds: { disable: true },
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'fullscreen',
